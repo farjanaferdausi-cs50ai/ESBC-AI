@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: esbc-ai-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m app.ingest
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.11
+      - key: PYTHONUTF8
+        value: "1"
+      - key: GOOGLE_API_KEY
+        sync: false
