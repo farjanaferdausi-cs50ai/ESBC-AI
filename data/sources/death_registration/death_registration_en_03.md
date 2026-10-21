@@ -1,11 +1,9 @@
 ---
 service: death_registration
-title: BDRIS portal status check (Office of the Registrar General, Birth and Death Registration)
-url: https://bdris.gov.bd/
-date_checked: 2026-10-20
+title: BDRIS portal maintenance notice (birth and death registration system)
+date_checked: 2026-10-21
 language: en
 ---
 
-On 20 October 2026, I checked the official BDRIS homepage (bdris.gov.bd). It displayed a system maintenance notice in Bangla. The notice says that maintenance work is currently under way to improve the performance and security of the system, and it gives support@bdris.gov.bd as the contact for urgent help.
-
-Because of this notice, the current online death registration process could not be read from the portal itself on that date. Descriptions of the online application on other pages may not reflect the current state of the portal, so the status should be confirmed with the registration office or the portal.
+On 21 October 2026, the official BDRIS website (bdris.gov.bd) displayed a "System Maintenance" notice in Bangla. The notice says that the Birth and Death Registration System (BDRIS) and its application server are under maintenance, and that all birth and death registration activities in the BDRIS system are closed from 06:00 on 19 October 2026 until 06:00 on 25 October 2026. The contact for urgent help is support@bdris.gov.bd.
+During this period, online birth and death registration through BDRIS is not available. The portal should be checked again after 25 October 2026.
