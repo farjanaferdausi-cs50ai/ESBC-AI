@@ -1,0 +1,9 @@
+.git
+.venv
+backend/.venv
+backend/.env
+backend/.chroma
+frontend
+node_modules
+__pycache__
+*.pyc
