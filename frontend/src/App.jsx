@@ -6,43 +6,57 @@ const API = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000").replace(/\
 const EXAMPLES = [
   "What documents are needed for a death certificate?",
   "How much is a 64-page, 10-year e-passport?",
-  "বয়স্ক ভাতা পেতে কত বয়স লাগে?",
+  "\u09ac\u09af\u09bc\u09b8\u09cd\u0995 \u09ad\u09be\u09a4\u09be \u09aa\u09c7\u09a4\u09c7 \u0995\u09a4 \u09ac\u09af\u09bc\u09b8 \u09b2\u09be\u0997\u09c7?",
 ];
 
 function useApiStatus() {
   const [status, setStatus] = useState("checking");
   const [meta, setMeta] = useState(null);
   useEffect(() => {
+    let stop = false;
     async function ping(attempt) {
       try {
+        const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), 25000);
         const res = await fetch(`${API}/api/meta`, { signal: ctrl.signal });
         clearTimeout(timer);
         if (!res.ok) throw new Error("bad status");
         const data = await res.json();
-        if (!stop) {
-          setMeta(data);
-          setStatus(data.ready ? "online" : "degraded");
+        if (stop) return;
+        setMeta(data);
+        if (data.ready) {
+          setStatus("online");
+        } else {
+          setStatus("degraded");
+          if (attempt < 20) setTimeout(() => ping(attempt + 1), 4000);
         }
       } catch {
         if (stop) return;
         setStatus(attempt < 12 ? "waking" : "offline");
+        if (attempt < 12) setTimeout(() => ping(attempt + 1), 5000);
       }
+    }
     ping(0);
     return () => { stop = true; };
   }, []);
   return { status, meta };
+}
 
 function renderInline(text, sources) {
+  return text
     .split(/(\*\*[^*]+\*\*|\[\d+\])/g)
     .filter(Boolean)
+    .map((part, i) => {
       if (part.startsWith("**") && part.endsWith("**")) return <strong key={i}>{part.slice(2, -2)}</strong>;
       const m = part.match(/^\[(\d+)\]$/);
+      if (m) {
         const src = sources.find((s) => s.id === Number(m[1]));
         if (src) {
           return (
             <a key={i} className="cite" href={src.url} target="_blank" rel="noreferrer" title={src.title}>
+              {m[1]}
             </a>
+          );
         }
       }
       return part;
@@ -50,7 +64,9 @@ function renderInline(text, sources) {
 }
 
 function Answer({ text, sources }) {
+  const blocks = [];
   let list = null;
+  for (const raw of text.split("\n")) {
     const line = raw.trim();
     if (!line) { list = null; continue; }
     const ol = line.match(/^(\d+)[.)]\s+(.*)$/);
@@ -58,11 +74,13 @@ function Answer({ text, sources }) {
     if (ol || ul) {
       const type = ol ? "ol" : "ul";
       if (!list || list.type !== type) { list = { type, items: [] }; blocks.push(list); }
+      list.items.push(ol ? ol[2] : ul[1]);
     } else {
       list = null;
       blocks.push({ type: "p", text: line });
     }
   }
+  return blocks.map((b, i) => {
     if (b.type === "p") return <p key={i}>{renderInline(b.text, sources)}</p>;
     const Tag = b.type;
     return <Tag key={i}>{b.items.map((t, j) => <li key={j}>{renderInline(t, sources)}</li>)}</Tag>;
@@ -70,17 +88,23 @@ function Answer({ text, sources }) {
 }
 
 function BotMessage({ m, onPrint }) {
+  const [copied, setCopied] = useState(false);
   if (m.error) return <p className="error">{m.text}</p>;
   const sources = m.sources || [];
+  async function copy() {
+    try {
       await navigator.clipboard.writeText(m.text);
+      setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch { /* clipboard unavailable */ }
   }
   return (
     <>
       <div className="answer"><Answer text={m.text} sources={sources} /></div>
+      <div className="meta-row">
         <span className={`chip-badge ${m.confident ? "ok" : "warn"}`}>
           {m.confident ? "Grounded in official sources" : "Not sure"}
+        </span>
         <span className="chip-badge">{m.language === "bn" ? "Bangla" : "English"}</span>
         {m.topScore != null && <span className="chip-badge">match {m.topScore.toFixed(2)}</span>}
         <span className="spacer" />
@@ -91,12 +115,15 @@ function BotMessage({ m, onPrint }) {
         <div className="sources">
           <div className="sources-title">Sources</div>
           {sources.map((s) => (
+            <a key={s.id} className="source" href={s.url} target="_blank" rel="noreferrer">
               <span className="source-id">{s.id}</span>
+              <span className="source-body">
                 <span className="source-name">{s.title}</span>
                 <span className="source-meta">
                   {s.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} · checked {s.date_checked}
                 </span>
               </span>
+            </a>
           ))}
         </div>
       )}
@@ -107,6 +134,7 @@ function BotMessage({ m, onPrint }) {
 function Field({ label, children }) {
   return (
     <label className="field">
+      <span>{label}</span>
       {children}
     </label>
   );
@@ -114,30 +142,37 @@ function Field({ label, children }) {
 
 function DeathGuide({ onSubmit }) {
   const [where, setWhere] = useState("in a hospital or clinic");
+  const [when, setWhen] = useState("within 45 days");
   return (
     <section className="panel">
       <h2>Death certificate guide</h2>
       <p className="panel-sub">Answer two questions and I will build a checklist from the official sources, including the fee and any current notice.</p>
+      <div className="form-grid">
         <Field label="Where did the death occur?">
           <select value={where} onChange={(e) => setWhere(e.target.value)}>
             <option value="in a hospital or clinic">Hospital or clinic</option>
             <option value="at home">At home</option>
             <option value="unnaturally, for example in an accident">Unnatural death</option>
           </select>
+        </Field>
         <Field label="How long ago?">
           <select value={when} onChange={(e) => setWhen(e.target.value)}>
             <option value="within 45 days">Within 45 days</option>
+            <option value="between 46 days and 5 years ago">46 days to 5 years</option>
             <option value="more than 5 years ago">More than 5 years</option>
+          </select>
         </Field>
       </div>
       <button className="primary" onClick={() => onSubmit(
         `I need to register a death. The person died ${where}, ${when}. Give me a step-by-step checklist: the documents I need, the fee, where to submit the application, and any current notice that affects me.`
+      )}>Build my checklist</button>
     </section>
   );
 }
 
 function BenefitFinder({ onSubmit }) {
   const [kind, setKind] = useState("the old age allowance");
+  const [age, setAge] = useState("66");
   const [sex, setSex] = useState("female");
   const [income, setIncome] = useState("30000");
   return (
@@ -149,6 +184,7 @@ function BenefitFinder({ onSubmit }) {
           <select value={kind} onChange={(e) => setKind(e.target.value)}>
             <option value="the old age allowance">Old age allowance</option>
             <option value="the widow and abandoned wife allowance">Widow and abandoned wife allowance</option>
+            <option value="the financial support for patients with cancer, kidney disease, liver cirrhosis, paralysis, heart disease, leukemia or thalassemia">Serious disease support</option>
             <option value="the allowance for disadvantaged communities">Disadvantaged communities</option>
           </select>
         </Field>
@@ -161,7 +197,9 @@ function BenefitFinder({ onSubmit }) {
             <option value="male">Male</option>
           </select>
         </Field>
+        <Field label="Yearly household income (BDT)">
           <input type="number" min="0" step="1000" value={income} onChange={(e) => setIncome(e.target.value)} />
+        </Field>
       </div>
       <button className="primary" onClick={() => onSubmit(
         `Am I likely eligible for ${kind}? I am ${age} years old, ${sex}, with a yearly household income of about ${income} BDT. List the eligibility rules, the amount, the documents I need and how to apply.`
@@ -191,6 +229,7 @@ export default function App() {
   }, []);
 
   async function send(text) {
+    const question = text.trim();
     if (question.length < 2 || loading) return;
     setTab("ask");
     setMessages((prev) => [...prev, { role: "user", text: question }]);
@@ -199,6 +238,7 @@ export default function App() {
     try {
       const res = await fetch(`${API}/api/chat`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: question, plain_mode: plain }),
       });
       if (!res.ok) throw new Error(`Server returned ${res.status}`);
@@ -210,6 +250,7 @@ export default function App() {
     } catch {
       setMessages((prev) => [...prev, {
         role: "bot", error: true,
+        text: "The assistant is waking up or temporarily unavailable. Please try again in a moment.",
       }]);
     } finally {
       setLoading(false);
@@ -219,11 +260,13 @@ export default function App() {
   function printMessage(index) {
     setPrintId(index);
     setTimeout(() => window.print(), 60);
+  }
 
   const statusText = {
     checking: "Connecting",
     waking: "Waking the server",
-    degraded: "Knowledge base loading",
+    online: "Online",
+    degraded: "Preparing knowledge base",
     offline: "Offline",
   }[status];
 
@@ -234,10 +277,13 @@ export default function App() {
           <div className="logo">E</div>
           <div>
             <div className="brand-name">ESBC-AI</div>
+            <div className="brand-sub">Easy Service for Bangladeshi Citizens</div>
           </div>
         </div>
         <div className="top-actions">
+          <span className={`status ${status}`}><i />{statusText}</span>
           <label className="toggle" title="Explain in very simple words">
+            <input type="checkbox" checked={plain} onChange={(e) => setPlain(e.target.checked)} />
             <span className="track"><span className="thumb" /></span>
             <span className="toggle-label">Plain language</span>
           </label>
@@ -260,14 +306,18 @@ export default function App() {
             <p>
               Ask in English or Bangla. Every answer is built from official government sources, shows
               where it came from and when I checked it, and says so when I am not sure.
+            </p>
             {meta?.ready && (
+              <div className="stats">
                 <div><b>{meta.documents}</b><span>official pages</span></div>
+                <div><b>{meta.services.length}</b><span>service areas</span></div>
                 <div><b>{meta.last_checked}</b><span>last verified</span></div>
               </div>
             )}
             <div className="chips">
               {EXAMPLES.map((q) => (
                 <button key={q} className="chip" onClick={() => send(q)}>{q}</button>
+              ))}
             </div>
           </section>
         )}
@@ -277,9 +327,11 @@ export default function App() {
             <div key={i} className="row user"><div className="bubble user">{m.text}</div></div>
           ) : (
             <div key={i} className={`row bot ${printId === i ? "print-target" : ""}`}>
+              <div className="avatar">E</div>
               <div className="bubble bot">
                 <BotMessage m={m} onPrint={() => printMessage(i)} />
                 <div className="print-note">Generated by ESBC-AI. Not an official government document. Please confirm with the official office.</div>
+              </div>
             </div>
           )
         )}
@@ -288,6 +340,7 @@ export default function App() {
           <div className="row bot">
             <div className="avatar">E</div>
             <div className="bubble bot"><div className="typing"><i /><i /><i /></div></div>
+          </div>
         )}
         <div ref={endRef} />
       </main>
@@ -299,6 +352,7 @@ export default function App() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about a government service..."
+              maxLength={1000}
               aria-label="Your question"
             />
             <button type="submit" disabled={loading || input.trim().length < 2}>Ask</button>

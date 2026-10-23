@@ -1,7 +1,9 @@
 .venv/
 .env
 __pycache__/
-node_modules/
 *.pyc
+.pytest_cache/
 .chroma/
+node_modules/
 dist/
+.DS_Store

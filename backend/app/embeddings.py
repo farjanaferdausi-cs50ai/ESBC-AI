@@ -17,7 +17,7 @@ def _get_client():
     if _client is None:
         key = os.getenv("GOOGLE_API_KEY")
         if not key:
-            raise RuntimeError("GOOGLE_API_KEY is missing in backend/.env")
+            raise RuntimeError("GOOGLE_API_KEY is missing")
         _client = genai.Client(api_key=key)
     return _client
 

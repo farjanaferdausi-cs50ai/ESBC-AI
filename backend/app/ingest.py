@@ -25,7 +25,7 @@ def parse_doc(path):
 
 
 def split_sentences(text):
-    parts = re.split(r"(?<=[।.?!])\s+", text)
+    parts = re.split(r"(?<=[\u0964.?!])\s+", text)
     return [p.strip() for p in parts if p.strip()]
 
 

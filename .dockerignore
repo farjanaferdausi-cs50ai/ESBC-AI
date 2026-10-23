@@ -4,6 +4,8 @@ backend/.venv
 backend/.env
 backend/.chroma
 frontend
+docs
+eval
 node_modules
 __pycache__
 *.pyc
