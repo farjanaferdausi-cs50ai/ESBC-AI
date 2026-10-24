@@ -241,16 +241,24 @@ export default function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: question, plain_mode: plain }),
       });
-      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      if (!res.ok) {
+        let detail = "";
+        try { detail = (await res.json()).detail || ""; } catch { /* no JSON body */ }
+        const failure = new Error(typeof detail === "string" ? detail : "");
+        failure.fromServer = true;
+        throw failure;
+      }
       const data = await res.json();
       setMessages((prev) => [...prev, {
         role: "bot", text: data.answer, sources: data.sources,
         confident: data.confident, language: data.language, topScore: data.top_score,
       }]);
-    } catch {
+    } catch (err) {
       setMessages((prev) => [...prev, {
         role: "bot", error: true,
-        text: "The assistant is waking up or temporarily unavailable. Please try again in a moment.",
+        text: err.fromServer && err.message
+          ? err.message
+          : "The assistant is waking up or temporarily unavailable. Please try again in a moment.",
       }]);
     } finally {
       setLoading(false);

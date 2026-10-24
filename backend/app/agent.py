@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from google.genai import types
 from langgraph.graph import END, START, StateGraph
 
-from app.config import ENV_PATH, GEN_MODEL, SCORE_THRESHOLD, TOP_K
+from app.config import ENV_PATH, GEN_MODELS, SCORE_THRESHOLD, TOP_K
 from app.embeddings import _get_client as get_client
 from app.search import search
 
@@ -78,20 +78,24 @@ def route(state: State) -> str:
 
 
 def _call_model(system: str, user: str) -> str:
-    for attempt in range(4):
-        try:
-            res = get_client().models.generate_content(
-                model=GEN_MODEL,
-                contents=user,
-                config=types.GenerateContentConfig(system_instruction=system, temperature=0.2),
-            )
-            return (res.text or "").strip()
-        except Exception as exc:
-            if attempt == 3:
-                raise
-            time.sleep(4 * (attempt + 1))
-            print(f"Generation retry ({exc})")
-    return ""
+    """Try each configured model in turn; free-tier quotas are per model, so this adds headroom."""
+    last_error = None
+    for round_number in range(2):
+        for model in GEN_MODELS:
+            try:
+                res = get_client().models.generate_content(
+                    model=model,
+                    contents=user,
+                    config=types.GenerateContentConfig(system_instruction=system, temperature=0.2),
+                )
+                text = (res.text or "").strip()
+                if text:
+                    return text
+            except Exception as exc:
+                last_error = exc
+                print(f"Model {model} failed: {str(exc)[:140]}")
+        time.sleep(6 * (round_number + 1))
+    raise last_error or RuntimeError("generation failed")
 
 
 def generate(state: State) -> State:
@@ -154,21 +158,31 @@ def build_graph():
 
 
 _graph = None
+_cache = {}
+CACHE_SIZE = 256
 
 
 def ask(question: str, plain: bool = False) -> dict:
+    """Answer a question. Repeated questions are served from a small in-memory cache."""
     global _graph
+    key = (" ".join(question.lower().split()), bool(plain))
+    if key in _cache:
+        return dict(_cache[key])
     if _graph is None:
         _graph = build_graph()
     out = _graph.invoke({"question": question, "plain": plain})
     hits = out.get("hits", [])
-    return {
+    result = {
         "answer": out["answer"],
         "language": out["language"],
         "confident": out["confident"],
         "sources": out.get("sources", []),
         "top_score": max((h["score"] for h in hits), default=None),
     }
+    if len(_cache) >= CACHE_SIZE:
+        _cache.pop(next(iter(_cache)))
+    _cache[key] = result
+    return dict(result)
 
 
 if __name__ == "__main__":

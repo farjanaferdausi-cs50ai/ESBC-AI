@@ -1,11 +1,20 @@
 """Retrieval and agent tests that run offline with a deterministic fake embedding."""
 import zlib
 
+import pytest
+
 import app.agent as agent
 import app.ingest as ingest
 import app.search as search_mod
 
 DIM = 128
+
+
+@pytest.fixture(autouse=True)
+def clear_answer_cache():
+    agent._cache.clear()
+    yield
+    agent._cache.clear()
 
 
 def fake_embed(texts, task_type, batch_size=20):
@@ -112,3 +121,62 @@ def test_agent_declines_when_model_returns_no_answer(monkeypatch):
     out = agent.ask("How much is the driving licence fee?")
     assert out["confident"] is False and out["sources"] == []
     assert out["answer"] == agent.FALLBACK["en"]
+
+
+class _FakeModels:
+    def __init__(self, fail_first):
+        self.fail_first = fail_first
+        self.calls = []
+
+    def generate_content(self, model, contents, config):
+        self.calls.append(model)
+        if len(self.calls) <= self.fail_first:
+            raise RuntimeError("429 RESOURCE_EXHAUSTED")
+
+        class Reply:
+            text = "ok from " + model
+
+        return Reply()
+
+
+class _FakeClient:
+    def __init__(self, fail_first):
+        self.models = _FakeModels(fail_first)
+
+
+def test_model_fallback_uses_next_model(monkeypatch):
+    client = _FakeClient(fail_first=1)
+    monkeypatch.setattr(agent, "get_client", lambda: client)
+    monkeypatch.setattr(agent, "GEN_MODELS", ["model-a", "model-b"])
+    monkeypatch.setattr(agent.time, "sleep", lambda s: None)
+    assert agent._call_model("sys", "user") == "ok from model-b"
+    assert client.models.calls == ["model-a", "model-b"]
+
+
+def test_model_failure_raises_after_all_attempts(monkeypatch):
+    client = _FakeClient(fail_first=99)
+    monkeypatch.setattr(agent, "get_client", lambda: client)
+    monkeypatch.setattr(agent, "GEN_MODELS", ["model-a"])
+    monkeypatch.setattr(agent.time, "sleep", lambda s: None)
+    try:
+        agent._call_model("sys", "user")
+        raise AssertionError("expected an error")
+    except RuntimeError:
+        pass
+
+
+def test_repeated_questions_are_cached(monkeypatch):
+    agent._cache.clear()
+    calls = {"n": 0}
+    hits = [{"text": "a", "score": 0.8, "title": "T", "url": "u", "date_checked": "d", "service": "s"}]
+
+    def counting_search(q, k=5):
+        calls["n"] += 1
+        return hits
+
+    monkeypatch.setattr(agent, "search", counting_search)
+    monkeypatch.setattr(agent, "_call_model", lambda system, user: "fee is 50 [1]")
+    first = agent.ask("What is the fee?")
+    second = agent.ask("  what is the FEE? ")
+    assert first == second and calls["n"] == 1
+    agent._cache.clear()

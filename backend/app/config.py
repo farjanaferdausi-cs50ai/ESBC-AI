@@ -10,6 +10,11 @@ EMBED_MODEL = "gemini-embedding-001"
 EMBED_DIM = 768
 REQUIRED_META = ["service", "title", "url", "date_checked", "language"]
 
-GEN_MODEL = os.getenv("GEN_MODEL", "gemini-flash-latest")
+GEN_MODELS = [
+    m.strip()
+    for m in os.getenv("GEN_MODELS", "gemini-flash-latest,gemini-flash-lite-latest").split(",")
+    if m.strip()
+]
+GEN_MODEL = GEN_MODELS[0]
 TOP_K = 5
 SCORE_THRESHOLD = float(os.getenv("SCORE_THRESHOLD", "0.6"))

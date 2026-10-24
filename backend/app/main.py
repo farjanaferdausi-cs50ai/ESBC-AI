@@ -79,8 +79,14 @@ def chat(req: ChatRequest):
         )
     try:
         return ask(req.message.strip(), plain=req.plain_mode)
-    except Exception:
+    except Exception as exc:
         log.exception("chat failed")
+        text = str(exc)
+        if any(k in text for k in ("429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE")):
+            raise HTTPException(
+                status_code=503,
+                detail="The free AI service is busy right now. Please wait about a minute and try again.",
+            )
         raise HTTPException(
             status_code=503,
             detail="The assistant is temporarily unavailable. Please try again.",

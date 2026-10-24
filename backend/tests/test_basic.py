@@ -80,3 +80,15 @@ def test_chat_warming_up_returns_503(monkeypatch):
 
     monkeypatch.setattr(m, "index_ready", lambda: False)
     assert TestClient(m.app).post("/api/chat", json={"message": "hello there"}).status_code == 503
+
+
+def test_busy_quota_error_gets_friendly_message(monkeypatch):
+    import app.main as m
+
+    def busy(q, plain=False):
+        raise RuntimeError("429 RESOURCE_EXHAUSTED quota")
+
+    monkeypatch.setattr(m, "index_ready", lambda: True)
+    monkeypatch.setattr(m, "ask", busy)
+    res = TestClient(m.app).post("/api/chat", json={"message": "hello there"})
+    assert res.status_code == 503 and "busy" in res.json()["detail"]

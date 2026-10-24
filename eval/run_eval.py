@@ -8,6 +8,7 @@ Measures, on a fixed question set with Bangla and English questions:
 Results are written to docs/evaluation.md and docs/evaluation.json.
 """
 import json
+import os
 import statistics
 import sys
 import time
@@ -57,7 +58,8 @@ def contains_any(text, keywords):
 
 def run(cases, ask_fn, search_fn, pause=1.0):
     rows = []
-    for lang, question, expected in cases:
+    for number, (lang, question, expected) in enumerate(cases, 1):
+        print(f"[{number}/{len(cases)}] {question[:70]}", flush=True)
         row = {"lang": lang, "question": question, "in_scope": expected is not None}
         try:
             result = ask_fn(question)
@@ -71,7 +73,8 @@ def run(cases, ask_fn, search_fn, pause=1.0):
         except Exception as exc:
             row["error"] = str(exc)[:160]
         rows.append(row)
-        time.sleep(pause)
+        # The free Gemini tier allows about 5 generation calls a minute, so wait after each model call.
+        time.sleep(pause if row.get("confident") else min(pause, 1.0))
     return rows
 
 
@@ -149,7 +152,9 @@ def main():
     from app.agent import ask
     from app.search import search
 
-    rows = run(CASES, ask, search)
+    pause = float(os.getenv("EVAL_PAUSE", "13"))
+    print(f"Running {len(CASES)} questions with a {pause:.0f}s pause after each model call (about {len(CASES) * pause / 60:.0f} minutes)...")
+    rows = run(CASES, ask, search, pause=pause)
     stats = summarise(rows)
     write_reports(rows, stats)
     for key, value in stats.items():
