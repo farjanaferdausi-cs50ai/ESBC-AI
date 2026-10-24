@@ -1,0 +1,303 @@
+{
+  "stats": {
+    "questions": 29,
+    "errors": 0,
+    "retrieval_hit_rate": 73.91304347826086,
+    "retrieval_hit_rate_en": 69.23076923076923,
+    "retrieval_hit_rate_bn": 80.0,
+    "answer_accuracy": 60.86956521739131,
+    "answer_accuracy_en": 46.15384615384615,
+    "answer_accuracy_bn": 80.0,
+    "refusal_accuracy": 100.0,
+    "mean_top_score_in_scope": 0.667,
+    "mean_top_score_out_of_scope": 0.6185,
+    "max_top_score_out_of_scope": 0.664,
+    "min_top_score_in_scope": 0.478
+  },
+  "rows": [
+    {
+      "lang": "en",
+      "question": "How much does a 64-page, 10-year e-passport cost with regular delivery?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.745,
+      "answer": "A 64-page, 10-year e-Passport with regular delivery costs TK 8,050 for inside Bangladesh (including 15% VAT) [1]. For a Bangladesh Mission's General Applicant, it costs USD 175 [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "What are the delivery times for regular, express and super express e-passports?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.728,
+      "answer": "The delivery times from the biometric enrolment date are as follows:\n\n* **Regular Delivery:** Within 15 working days / 21 days [1].\n* **Express Delivery:** Within 7 working days / 10 days [1].\n* **Super Express Delivery:** Within 2 working days [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "What documents must I bring to the passport office for biometric enrolment?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.724,
+      "answer": "To bring to the passport office for biometric enrolment, you need the following documents (as updated on 7 May 2025):\n\n1. Printed application summary including appointment (if any) [1].\n2. Identification documents (original NID card or birth certificate) [1].\n3. Payment slip (for offline payment only) [1].\n4. Previous passport (if any) [1].\n5. GO/NOC for government service holders (as applicable) [1].\n6. Printed application form [1].\n\nFurther necessity of documents may depend on the nature of the application and corrections (if any) [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "Which payment channels can I use to pay e-passport fees online?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.739,
+      "answer": "To pay e-passport fees online, you can use the following payment channels:\n\n1. **Payment Gateways / Systems:** A-Challan, DGePay, and ShurjoPay [1].\n2. **Payment Options / Methods:** VISA, Master Card, American Express, bKash, Nagad, Rocket, Upay, Dmoney, OK Wallet, Bank Asia, BRAC Bank, EBL, City Bank, UCB, AB Bank, DBBL, Midland Bank, and MBL Rainbow [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "What is the minimum age to receive the old age allowance?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.531,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": true,
+      "answer_correct": false
+    },
+    {
+      "lang": "en",
+      "question": "What is the yearly income limit for the old age allowance?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.478,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": false,
+      "answer_correct": false
+    },
+    {
+      "lang": "en",
+      "question": "How much is the monthly widow allowance in 2026-27?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.548,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": false,
+      "answer_correct": false
+    },
+    {
+      "lang": "en",
+      "question": "How much financial support does a cancer patient receive?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.518,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": false,
+      "answer_correct": false
+    },
+    {
+      "lang": "en",
+      "question": "What is the deadline to register a death without paying a fee?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.576,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": false,
+      "answer_correct": false
+    },
+    {
+      "lang": "en",
+      "question": "What is the fee to register a death after more than 5 years?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.592,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": true,
+      "answer_correct": false
+    },
+    {
+      "lang": "en",
+      "question": "Can I apply for death registration online this week?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.686,
+      "answer": "No, you cannot apply for death registration online right now [1]. According to the BDRIS portal maintenance notice checked on 21 October 2026, all birth and death registration activities and online applications in the BDRIS system are closed from 06:00 on 19 October 2026 until 06:00 on 25 October 2026 due to system maintenance [1]. The portal should be checked again after 25 October 2026 [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "What is the income tax contact center number?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.756,
+      "answer": "The income tax contact center number is 333 [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "What is the fee for the first correction of an NID?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.627,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "retrieval_hit": true,
+      "answer_correct": false
+    },
+    {
+      "lang": "bn",
+      "question": "৬৪ পৃষ্ঠার ১০ বছর মেয়াদী ই-পাসপোর্টের রেগুলার ডেলিভারি ফি কত?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.641,
+      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
+      "retrieval_hit": false,
+      "answer_correct": false
+    },
+    {
+      "lang": "bn",
+      "question": "বয়স্ক ভাতা পেতে পুরুষ ও নারীর সর্বনিম্ন বয়স কত?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.747,
+      "answer": "বয়স্ক ভাতা পেতে পুরুষ ও নারীর সর্বনিম্ন বয়স হলো:\n* পুরুষের ক্ষেত্রে সর্বনিম্ন ৬৫ বছর [1]।\n* মহিলাদের ক্ষেত্রে সর্বনিম্ন ৬২ বছর (সরকার সময় সময় যে বয়স নির্ধারণ করে তা বিবেচনায় নিতে হবে) [1]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "বিধবা ভাতার মাসিক পরিমাণ কত?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.758,
+      "answer": "২০২৬-২৭ অর্থ বছরে বিধবা ভাতার মাসিক পরিমাণ জনপ্রতি ৭০০ টাকা [১]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "মৃত্যুর কত দিনের মধ্যে ফি ছাড়া নিবন্ধন করা যায়?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.697,
+      "answer": "৪ এপ্রিল ২০২৬ তারিখের তথ্য অনুযায়ী, মৃত্যুর ৪৫ (পঁয়তাল্লিশ) দিন পর্যন্ত কোনো ব্যক্তির মৃত্যু নিবন্ধন বিনা ফিসে করা যায় [১]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "মৃত্যু নিবন্ধন ৫ বছর পরে করলে ফি কত?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.718,
+      "answer": "মৃত্যু নিবন্ধন ৫ বছর পর করলে সাকুল্য ফি ৫০ টাকা [১]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "এই সপ্তাহে কি অনলাইনে মৃত্যু নিবন্ধনের আবেদন করা যাবে?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.716,
+      "answer": "না, এই সপ্তাহে অনলাইনে মৃত্যু নিবন্ধনের আবেদন করা যাবে না [১, ২]। \n\nকারণ জন্ম ও মৃত্যু নিবন্ধন সিস্টেম (BDRIS) এবং এর Application Server-এর রক্ষণাবেক্ষণ কার্যক্রমের জন্য ১৯/১০/২০২৬ তারিখ ০৬:০০ ঘটিকা থেকে ২৫/১০/২০২৬ তারিখ সকাল ০৬:০০ ঘটিকা পর্যন্ত BDRIS সিস্টেমে জন্ম ও মৃত্যু নিবন্ধন সংক্রান্ত সকল কার্যক্রম বন্ধ থাকবে [২]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "জন্ম নিবন্ধনের তথ্য সংশোধনের ফি কত?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.805,
+      "answer": "জন্ম নিবন্ধনের তথ্য সংশোধনের ফি নিচে দেওয়া হলো (৪ এপ্রিল ২০২৬ তারিখে হালনাগাদকৃত তথ্য অনুযায়ী) [১]:\n\n১. জন্ম তারিখ সংশোধনের জন্য আবেদন ফি: ১০০ টাকা [১]।\n২. জন্ম তারিখ ব্যতীত নাম, পিতার নাম, মাতার নাম, ঠিকানা ইত্যাদি অন্যান্য তথ্য সংশোধনের জন্য আবেদন ফি: ৫০ টাকা [১]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "NID সংশোধনের ফি প্রথমবার কত টাকা?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.756,
+      "answer": "জাতীয় পরিচয়পত্র (NID) সংশোধনের ক্ষেত্রে প্রথমবার আবেদনের ফি ২০০ টাকা [2]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "bn",
+      "question": "আয়কর কন্টাক্ট সেন্টারের নম্বর কত?",
+      "in_scope": true,
+      "confident": false,
+      "top": 0.538,
+      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
+      "retrieval_hit": false,
+      "answer_correct": false
+    },
+    {
+      "lang": "bn",
+      "question": "মৃত্যু নিবন্ধনের জন্য ইমামের প্রত্যয়ন লাগে কি?",
+      "in_scope": true,
+      "confident": true,
+      "top": 0.717,
+      "answer": "হ্যাঁ, অনলাইনে মৃত্যু নিবন্ধনের আবেদনের জন্য সংযোজন অংশে জানাজা পড়ানো ইমামের প্রত্যয়নপত্র বা সৎকার সম্পন্নকারী পুরোহিতের প্রত্যয়নপত্র যুক্ত করার কথা উল্লেখ আছে [১]।",
+      "retrieval_hit": true,
+      "answer_correct": true
+    },
+    {
+      "lang": "en",
+      "question": "How much is the driving licence fee?",
+      "in_scope": false,
+      "confident": false,
+      "top": 0.628,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "refused": true
+    },
+    {
+      "lang": "en",
+      "question": "How do I apply for land mutation?",
+      "in_scope": false,
+      "confident": false,
+      "top": 0.574,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "refused": true
+    },
+    {
+      "lang": "en",
+      "question": "How do I get a police clearance certificate?",
+      "in_scope": false,
+      "confident": false,
+      "top": 0.628,
+      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "refused": true
+    },
+    {
+      "lang": "bn",
+      "question": "ড্রাইভিং লাইসেন্সের ফি কত?",
+      "in_scope": false,
+      "confident": false,
+      "top": 0.664,
+      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
+      "refused": true
+    },
+    {
+      "lang": "bn",
+      "question": "ট্রেড লাইসেন্স কীভাবে করব?",
+      "in_scope": false,
+      "confident": false,
+      "top": 0.621,
+      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
+      "refused": true
+    },
+    {
+      "lang": "bn",
+      "question": "ভূমি মিউটেশনের আবেদন কীভাবে করব?",
+      "in_scope": false,
+      "confident": false,
+      "top": 0.596,
+      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
+      "refused": true
+    }
+  ]
+}

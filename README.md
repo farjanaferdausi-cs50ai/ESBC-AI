@@ -18,7 +18,7 @@ A bilingual (Bangla and English), citation-grounded AI assistant that explains B
 ![Status](https://img.shields.io/badge/status-capstone%20MVP-34d399)
 
 <!-- links:start -->
-**[Live app](https://esbc-ai-api.onrender.com)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)**
+**[Live app](https://esbc-ai.vercel.app)** | **[API docs](https://esbc-ai-api.onrender.com/docs)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)** | **[Evaluation](docs/evaluation.md)**
 <!-- links:end -->
 
 </div>
@@ -91,7 +91,13 @@ Only official `.gov.bd` pages are used. News sites, blogs and forums are deliber
 ## Evaluation
 
 <!-- eval:start -->
-Run `python eval/run_eval.py` to generate the results. They are written to `docs/evaluation.md`.
+Fixed set of 29 questions (answerable and out of scope, Bangla and English). Details and failures: [docs/evaluation.md](docs/evaluation.md).
+
+| Metric | All | English | Bangla |
+|---|---|---|---|
+| Retrieval hit rate (top 5) | 74% | 69% | 80% |
+| Answer accuracy | 61% | 46% | 80% |
+| Refusal accuracy on out-of-scope questions | 100% | | |
 <!-- eval:end -->
 
 The checks are keyword based, not an LLM judge, so they are a lower bound on quality and not a substitute for human review.
