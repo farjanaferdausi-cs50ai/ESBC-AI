@@ -18,9 +18,7 @@ A bilingual (Bangla and English), citation-grounded AI assistant that explains B
 ![Status](https://img.shields.io/badge/status-capstone%20MVP-34d399)
 
 <!-- links:start -->
-**[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)**
-
-*Live links are added after deployment.*
+**[Live app](https://esbc-ai-api.onrender.com)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)**
 <!-- links:end -->
 
 </div>
