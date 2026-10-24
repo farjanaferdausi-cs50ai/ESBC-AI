@@ -12,4 +12,4 @@ REQUIRED_META = ["service", "title", "url", "date_checked", "language"]
 
 GEN_MODEL = os.getenv("GEN_MODEL", "gemini-flash-latest")
 TOP_K = 5
-SCORE_THRESHOLD = float(os.getenv("SCORE_THRESHOLD", "0.55"))
+SCORE_THRESHOLD = float(os.getenv("SCORE_THRESHOLD", "0.6"))

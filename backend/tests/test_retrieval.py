@@ -74,9 +74,9 @@ def test_agent_answers_and_groups_sources(monkeypatch):
         {"text": "c", "score": 0.6, "title": "T2", "url": "u2", "date_checked": "d", "service": "s"},
     ]
     monkeypatch.setattr(agent, "search", lambda q, k=5: hits)
-    monkeypatch.setattr(agent, "_call_model", lambda system, user: "answer [1]")
+    monkeypatch.setattr(agent, "_call_model", lambda system, user: "answer [1] and [2]")
     out = agent.ask("What is the fee?")
-    assert out["confident"] and out["answer"] == "answer [1]"
+    assert out["confident"] and out["answer"] == "answer [1] and [2]"
     assert [s["id"] for s in out["sources"]] == [1, 2]
     assert out["top_score"] == 0.8
 
@@ -91,4 +91,24 @@ def test_agent_refuses_when_not_confident(monkeypatch):
     monkeypatch.setattr(agent, "_call_model", must_not_run)
     out = agent.ask("driving licence fee")
     assert not out["confident"] and out["sources"] == []
+    assert out["answer"] == agent.FALLBACK["en"]
+
+
+def test_agent_shows_only_cited_sources(monkeypatch):
+    hits = [
+        {"text": "a", "score": 0.8, "title": "T1", "url": "u1", "date_checked": "d", "service": "s"},
+        {"text": "c", "score": 0.7, "title": "T2", "url": "u2", "date_checked": "d", "service": "s"},
+    ]
+    monkeypatch.setattr(agent, "search", lambda q, k=5: hits)
+    monkeypatch.setattr(agent, "_call_model", lambda system, user: "only the first [1]")
+    out = agent.ask("What is the fee?")
+    assert [s["id"] for s in out["sources"]] == [1]
+
+
+def test_agent_declines_when_model_returns_no_answer(monkeypatch):
+    hits = [{"text": "a", "score": 0.8, "title": "T", "url": "u", "date_checked": "d", "service": "s"}]
+    monkeypatch.setattr(agent, "search", lambda q, k=5: hits)
+    monkeypatch.setattr(agent, "_call_model", lambda system, user: "NO_ANSWER")
+    out = agent.ask("How much is the driving licence fee?")
+    assert out["confident"] is False and out["sources"] == []
     assert out["answer"] == agent.FALLBACK["en"]

@@ -31,7 +31,7 @@ FALLBACK = {
 SYSTEM_PROMPT = """You are ESBC-AI, an assistant that explains Bangladeshi government services.
 Rules:
 1. Answer ONLY from the numbered context below. Never use outside knowledge.
-2. If the context does not contain the answer, say you are not sure. Never guess fees, deadlines or requirements.
+2. If the context does not contain the answer, reply with exactly NO_ANSWER and nothing else. Never guess fees, deadlines or requirements.
 3. Reply in {lang_name}. Match the language of the user's question exactly.
 4. Cite sources inline like [1] or [2] after the facts they support. Only use numbers that exist in the context.
 5. Be clear and practical. Use short numbered steps for procedures.
@@ -114,7 +114,9 @@ def generate(state: State) -> State:
         plain_rule=PLAIN_RULE if state.get("plain") else "",
     )
     user = f"Context:\n{context}\n\nQuestion: {state['question']}"
-    answer = _call_model(system, user) or FALLBACK[state["language"]]
+    answer = _call_model(system, user)
+    if not answer or answer.strip().upper().startswith("NO_ANSWER"):
+        return {"answer": FALLBACK[state["language"]], "sources": [], "confident": False}
     sources = [
         {
             "id": i,
@@ -126,6 +128,8 @@ def generate(state: State) -> State:
         }
         for i, g in enumerate(ordered, 1)
     ]
+    cited = {int(n) for n in re.findall(r"\[(\d+)\]", answer)}
+    sources = [s for s in sources if s["id"] in cited] or sources[:1]
     return {"answer": answer, "sources": sources}
 
 

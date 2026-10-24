@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/assets/preview.png" alt="ESBC-AI banner" width="860" />
+<img src="docs/banner.jpg" alt="ESBC-AI: Bangladesh National Memorial and Parliament across the water, with the ESBC AI title" width="860" />
 
 # ESBC-AI
 
@@ -17,7 +17,11 @@ A bilingual (Bangla and English), citation-grounded AI assistant that explains B
 ![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
 ![Status](https://img.shields.io/badge/status-capstone%20MVP-34d399)
 
-**[Live app](LIVE_APP_URL)** | **[API docs](LIVE_API_URL/docs)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)** | **[Evaluation](docs/evaluation.md)**
+<!-- links:start -->
+**[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)**
+
+*Live links are added after deployment.*
+<!-- links:end -->
 
 </div>
 
@@ -70,7 +74,7 @@ flowchart LR
 2. **Ingestion.** `python -m app.ingest` splits each file into overlapping chunks, embeds them with `gemini-embedding-001` (768 dimensions) and stores them in a persistent Chroma collection.
 3. **Retrieval.** A question is embedded and searched densely and with BM25. The two rankings are merged with reciprocal rank fusion. Chunks of the same page are grouped into one numbered source.
 4. **Gate.** If the best dense similarity is below `SCORE_THRESHOLD`, the model is not called and the assistant declines.
-5. **Generation.** Gemini answers only from the numbered context, in the language of the question, and cites sources as [1], [2]. The prompt tells it to mention closures and deadlines, to state the year of older figures and to prefer newer sources.
+5. **Generation.** Gemini answers only from the numbered context, in the language of the question, and cites sources as [1], [2]. If the context does not contain the answer it must reply `NO_ANSWER`, which the agent turns into the honest fallback. Only the sources the answer actually cites are shown. The prompt also tells it to mention closures and deadlines, to state the year of older figures and to prefer newer sources.
 
 ## Knowledge base
 
@@ -88,21 +92,17 @@ Only official `.gov.bd` pages are used. News sites, blogs and forums are deliber
 
 ## Evaluation
 
-The harness in `eval/run_eval.py` asks a fixed set of 29 questions (answerable and out of scope, in Bangla and English) and writes `docs/evaluation.md`. It reports retrieval hit rate, answer accuracy, refusal accuracy and the Bangla versus English gap. Results are in [docs/evaluation.md](docs/evaluation.md).
-
-| Metric | Result |
-|---|---|
-| Retrieval hit rate (top 5) | EVAL_RETRIEVAL |
-| Answer accuracy | EVAL_ANSWER |
-| Refusal accuracy on out-of-scope questions | EVAL_REFUSAL |
+<!-- eval:start -->
+Run `python eval/run_eval.py` to generate the results. They are written to `docs/evaluation.md`.
+<!-- eval:end -->
 
 The checks are keyword based, not an LLM judge, so they are a lower bound on quality and not a substitute for human review.
 
 ## Screenshots
 
-| Home | Death certificate guide | Answer with sources |
-|---|---|---|
-| ![Home](docs/screenshots/home.png) | ![Guide](docs/screenshots/guide.png) | ![Answer](docs/screenshots/answer.png) |
+<!-- shots:start -->
+Screenshots are added after deployment.
+<!-- shots:end -->
 
 ## Tech stack
 
@@ -124,7 +124,7 @@ backend/tests/   offline unit tests with a deterministic fake embedding
 data/sources/    official source documents, one folder per service
 frontend/        React application
 eval/            evaluation harness
-scripts/         doctor.py environment and data self-check
+scripts/         doctor.py self-check, update_readme.py for generated README blocks
 docs/            evaluation report, screenshots and the final report
 ```
 
@@ -153,6 +153,8 @@ Set `VITE_API_URL` to the address of a deployed API. Without it the UI talks to 
 
 **Self-check:** from the repository root run `python scripts/doctor.py` (add `--live` to test the Gemini calls).
 
+**Evaluation:** from the repository root run `python eval/run_eval.py`, then `python scripts/update_readme.py` to refresh the tables in this README.
+
 ## API
 
 | Method | Path | Purpose |
@@ -180,7 +182,7 @@ The suite covers language detection, chunking, front matter parsing, the API con
 
 - **Gemini embeddings instead of a local model.** A Windows application-control policy blocked PyTorch on my development machine, and free hosting has little memory. An embedding API keeps the image small and the deployment simple. This differs from the BGE-M3 or multilingual-e5 option named in my proposal.
 - **Hybrid retrieval.** Dense search handles paraphrases and cross-language questions, BM25 handles exact numbers and names such as fees and form names. Reciprocal rank fusion needs no tuning.
-- **Gate before generation.** Declining is cheaper and safer than a confident wrong answer about a fee or a deadline.
+- **Two layers of refusal.** A retrieval-score gate stops clearly unrelated questions before any model call, and a `NO_ANSWER` protocol catches questions that look related but are not answered by the sources. Declining is safer than a confident wrong answer about a fee or a deadline.
 - **Official sources only, with dates.** Each document carries the date I checked it, so answers can be audited and refreshed.
 - **Lightweight evaluation.** I used keyword-based checks instead of RAGAS to keep the harness small, offline-friendly for retrieval and easy to explain.
 
