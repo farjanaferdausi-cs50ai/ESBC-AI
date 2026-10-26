@@ -100,8 +100,8 @@ Fixed set of 29 questions (answerable and out of scope, Bangla and English). Det
 
 | Metric | All | English | Bangla |
 |---|---|---|---|
-| Retrieval hit rate (top 5) | 74% | 69% | 80% |
-| Answer accuracy | 61% | 46% | 80% |
+| Retrieval hit rate (top 5) | 100% | 100% | 100% |
+| Answer accuracy | 100% | 100% | 100% |
 | Refusal accuracy on out-of-scope questions | 100% | | |
 <!-- eval:end -->
 

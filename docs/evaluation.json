@@ -2,17 +2,17 @@
   "stats": {
     "questions": 29,
     "errors": 0,
-    "retrieval_hit_rate": 73.91304347826086,
-    "retrieval_hit_rate_en": 69.23076923076923,
-    "retrieval_hit_rate_bn": 80.0,
-    "answer_accuracy": 60.86956521739131,
-    "answer_accuracy_en": 46.15384615384615,
-    "answer_accuracy_bn": 80.0,
+    "retrieval_hit_rate": 100.0,
+    "retrieval_hit_rate_en": 100.0,
+    "retrieval_hit_rate_bn": 100.0,
+    "answer_accuracy": 100.0,
+    "answer_accuracy_en": 100.0,
+    "answer_accuracy_bn": 100.0,
     "refusal_accuracy": 100.0,
-    "mean_top_score_in_scope": 0.667,
-    "mean_top_score_out_of_scope": 0.6185,
+    "mean_top_score_in_scope": 0.7294347826086957,
+    "mean_top_score_out_of_scope": 0.6255,
     "max_top_score_out_of_scope": 0.664,
-    "min_top_score_in_scope": 0.478
+    "min_top_score_in_scope": 0.654
   },
   "rows": [
     {
@@ -21,7 +21,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.745,
-      "answer": "A 64-page, 10-year e-Passport with regular delivery costs TK 8,050 for inside Bangladesh (including 15% VAT) [1]. For a Bangladesh Mission's General Applicant, it costs USD 175 [1].",
+      "answer": "Based on the information provided (last updated 12 July 2026) [1], the cost for a 64-page, 10-year validity e-passport with regular delivery is TK 8,050 (inside Bangladesh, including 15% VAT) [1].",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -31,7 +31,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.728,
-      "answer": "The delivery times from the biometric enrolment date are as follows:\n\n* **Regular Delivery:** Within 15 working days / 21 days [1].\n* **Express Delivery:** Within 7 working days / 10 days [1].\n* **Super Express Delivery:** Within 2 working days [1].",
+      "answer": "Based on the provided sources (checked on 2026-10-20), the delivery times from the biometric enrolment date are as follows:\n\n* **Regular Delivery:** Within 15 working days / 21 days from the biometric enrolment date [1].\n* **Express Delivery:** Within 7 working days / 10 days from the biometric enrolment date [1].\n* **Super Express Delivery:** Within 2 working days from the biometric enrolment date [1].",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -41,7 +41,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.724,
-      "answer": "To bring to the passport office for biometric enrolment, you need the following documents (as updated on 7 May 2025):\n\n1. Printed application summary including appointment (if any) [1].\n2. Identification documents (original NID card or birth certificate) [1].\n3. Payment slip (for offline payment only) [1].\n4. Previous passport (if any) [1].\n5. GO/NOC for government service holders (as applicable) [1].\n6. Printed application form [1].\n\nFurther necessity of documents may depend on the nature of the application and corrections (if any) [1].",
+      "answer": "To bring to the passport office for biometric enrolment, you need the following documents (based on the update from 7 May 2025):\n\n1. Printed application summary including appointment (if any) [1].\n2. Identification documents (original NID card or birth certificate) [1].\n3. Payment slip (for offline payment only) [1].\n4. Previous passport (if any) (along with a print copy of the data page, as noted in the Bengali section) [1].\n5. GO/NOC for government service holders (as applicable) [1].\n6. Printed application form [1].\n7. Necessary documents for information corrections (if any) [1].\n\nFurther necessity of documents may depend on the nature of the application and corrections [1].",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -51,7 +51,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.739,
-      "answer": "To pay e-passport fees online, you can use the following payment channels:\n\n1. **Payment Gateways / Systems:** A-Challan, DGePay, and ShurjoPay [1].\n2. **Payment Options / Methods:** VISA, Master Card, American Express, bKash, Nagad, Rocket, Upay, Dmoney, OK Wallet, Bank Asia, BRAC Bank, EBL, City Bank, UCB, AB Bank, DBBL, Midland Bank, and MBL Rainbow [1].",
+      "answer": "To pay e-passport fees online, you can use the following channels and payment options based on the information updated on 12 July 2026:\n\n1. **Payment Platforms:** A-Challan, DGePay, and ShurjoPay [1].\n2. **Accepted Payment Methods:** VISA, Master Card, American Express, bKash, Nagad, Rocket, Upay, Dmoney, OK Wallet, Bank Asia, BRAC Bank, EBL, City Bank, UCB, AB Bank, DBBL, Midland Bank, and MBL Rainbow [1].",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -59,69 +59,69 @@
       "lang": "en",
       "question": "What is the minimum age to receive the old age allowance?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.531,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "confident": true,
+      "top": 0.7,
+      "answer": "The minimum age to receive the old age allowance is at least 65 years for men and at least 62 years for women (taking into consideration the age set by the government from time to time) [1].",
       "retrieval_hit": true,
-      "answer_correct": false
+      "answer_correct": true
     },
     {
       "lang": "en",
       "question": "What is the yearly income limit for the old age allowance?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.478,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
-      "retrieval_hit": false,
-      "answer_correct": false
+      "confident": true,
+      "top": 0.654,
+      "answer": "The average yearly income for the old age allowance must not be more than 45,000 taka [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
     },
     {
       "lang": "en",
       "question": "How much is the monthly widow allowance in 2026-27?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.548,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
-      "retrieval_hit": false,
-      "answer_correct": false
+      "confident": true,
+      "top": 0.72,
+      "answer": "The monthly widow allowance for the fiscal year 2026-27 is 700 taka per person per month [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
     },
     {
       "lang": "en",
       "question": "How much financial support does a cancer patient receive?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.518,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
-      "retrieval_hit": false,
-      "answer_correct": false
+      "confident": true,
+      "top": 0.696,
+      "answer": "From the fiscal year 2026-27, each finally selected patient receives a one-time payment of 100,000 taka (one lakh taka) [1].",
+      "retrieval_hit": true,
+      "answer_correct": true
     },
     {
       "lang": "en",
       "question": "What is the deadline to register a death without paying a fee?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.576,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
-      "retrieval_hit": false,
-      "answer_correct": false
+      "confident": true,
+      "top": 0.665,
+      "answer": "Based on the provided sources, the deadline to register a death without paying a fee (free of charge) is **within 45 days** of the death [1, 2].",
+      "retrieval_hit": true,
+      "answer_correct": true
     },
     {
       "lang": "en",
       "question": "What is the fee to register a death after more than 5 years?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.592,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "confident": true,
+      "top": 0.715,
+      "answer": "The fee to register a death more than 5 years after the event (lump sum) is 50 taka [1]. (This information is based on the official fee list last updated on 4 April 2026 [1].)",
       "retrieval_hit": true,
-      "answer_correct": false
+      "answer_correct": true
     },
     {
       "lang": "en",
       "question": "Can I apply for death registration online this week?",
       "in_scope": true,
       "confident": true,
-      "top": 0.686,
-      "answer": "No, you cannot apply for death registration online right now [1]. According to the BDRIS portal maintenance notice checked on 21 October 2026, all birth and death registration activities and online applications in the BDRIS system are closed from 06:00 on 19 October 2026 until 06:00 on 25 October 2026 due to system maintenance [1]. The portal should be checked again after 25 October 2026 [1].",
+      "top": 0.722,
+      "answer": "No, you cannot apply for death registration online this week. \n\nAccording to the BDRIS portal maintenance notice checked on 21 October 2026, the Birth and Death Registration System (BDRIS) and its application server are under maintenance, and all birth and death registration activities in the system are closed from 06:00 on 19 October 2026 until 06:00 on 25 October 2026 [2]. During this period, online birth and death registration through BDRIS is not available, and the portal should be checked again after 25 October 2026 [2]. For urgent help, you can contact support@bdris.gov.bd [2].",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -131,7 +131,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.756,
-      "answer": "The income tax contact center number is 333 [1].",
+      "answer": "The income tax contact center number is 333 [1, 4].",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -139,21 +139,21 @@
       "lang": "en",
       "question": "What is the fee for the first correction of an NID?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.627,
-      "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
+      "confident": true,
+      "top": 0.788,
+      "answer": "Based on the notice of the National Identity Registration Wing of the Bangladesh Election Commission (from a 2015 notice, so current fees may be different and the Election Commission's latest notice must be checked to confirm them) [1], the fees for NID correction (correcting information given in Form-2 at registration, such as name in Bangla and English, father's name, mother's name, date of birth, address, blood group, and signature) are as follows:\n\n1. **First application:** 200 taka [1].",
       "retrieval_hit": true,
-      "answer_correct": false
+      "answer_correct": true
     },
     {
       "lang": "bn",
       "question": "৬৪ পৃষ্ঠার ১০ বছর মেয়াদী ই-পাসপোর্টের রেগুলার ডেলিভারি ফি কত?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.641,
-      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
-      "retrieval_hit": false,
-      "answer_correct": false
+      "confident": true,
+      "top": 0.747,
+      "answer": "বাংলাদেশের ভেতরে ৬৪ পৃষ্ঠা ও ১০ বছর মেয়াদী ই-পাসপোর্টের সাধারণ (রেগুলার) ডেলিভারি ফি ৮,০৫০ টাকা (১৫% ভ্যাটসহ) [১]। \n\n*(ফি-এর এই পেজটি ১২ জুলাই ২০২৬ তারিখে শেষ হালনাগাদ করা হয়েছে) [১]।*",
+      "retrieval_hit": true,
+      "answer_correct": true
     },
     {
       "lang": "bn",
@@ -161,7 +161,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.747,
-      "answer": "বয়স্ক ভাতা পেতে পুরুষ ও নারীর সর্বনিম্ন বয়স হলো:\n* পুরুষের ক্ষেত্রে সর্বনিম্ন ৬৫ বছর [1]।\n* মহিলাদের ক্ষেত্রে সর্বনিম্ন ৬২ বছর (সরকার সময় সময় যে বয়স নির্ধারণ করে তা বিবেচনায় নিতে হবে) [1]।",
+      "answer": "বয়স্ক ভাতা পেতে পুরুষ ও নারীর সর্বনিম্ন বয়স:\n\n* পুরুষের ক্ষেত্রে: সর্বনিম্ন ৬৫ বছর [১]।\n* মহিলার ক্ষেত্রে: সর্বনিম্ন ৬২ বছর [১]। \n\n(তবে সরকার সময় সময় যে বয়স নির্ধারণ করে তা বিবেচনায় নিতে হবে [১]।)",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -171,7 +171,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.758,
-      "answer": "২০২৬-২৭ অর্থ বছরে বিধবা ভাতার মাসিক পরিমাণ জনপ্রতি ৭০০ টাকা [১]।",
+      "answer": "বিধবা ও স্বামী নিগৃহীতা ভাতার হার (২০২৬-২৭ অর্থ বছর অনুযায়ী) জনপ্রতি মাসিক ৭০০ টাকা, যা সারা বছর প্রদান করা হয় [১]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -181,7 +181,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.697,
-      "answer": "৪ এপ্রিল ২০২৬ তারিখের তথ্য অনুযায়ী, মৃত্যুর ৪৫ (পঁয়তাল্লিশ) দিন পর্যন্ত কোনো ব্যক্তির মৃত্যু নিবন্ধন বিনা ফিসে করা যায় [১]।",
+      "answer": "মৃত্যুর ৪৫ (পঁয়তাল্লিশ) দিন পর্যন্ত কোনো ব্যক্তির মৃত্যু নিবন্ধন বিনা ফিসে করা যায় [১]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -191,7 +191,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.718,
-      "answer": "মৃত্যু নিবন্ধন ৫ বছর পর করলে সাকুল্য ফি ৫০ টাকা [১]।",
+      "answer": "বাংলাদেশের নিবন্ধন কার্যালয় অনুযায়ী, মৃত্যু নিবন্ধনের ক্ষেত্রে ৫ (পাঁচ) বৎসর পর হইতে কোনো ব্যক্তির মৃত্যু নিবন্ধন (সাকুল্য) ফি হলো ৫০ টাকা [১]। \n\n৪ এপ্রিল ২০২৬ তারিখে হালনাগাদ করা তথ্য অনুযায়ী এই ফি নির্ধারিত হয়েছে [১]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -201,7 +201,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.716,
-      "answer": "না, এই সপ্তাহে অনলাইনে মৃত্যু নিবন্ধনের আবেদন করা যাবে না [১, ২]। \n\nকারণ জন্ম ও মৃত্যু নিবন্ধন সিস্টেম (BDRIS) এবং এর Application Server-এর রক্ষণাবেক্ষণ কার্যক্রমের জন্য ১৯/১০/২০২৬ তারিখ ০৬:০০ ঘটিকা থেকে ২৫/১০/২০২৬ তারিখ সকাল ০৬:০০ ঘটিকা পর্যন্ত BDRIS সিস্টেমে জন্ম ও মৃত্যু নিবন্ধন সংক্রান্ত সকল কার্যক্রম বন্ধ থাকবে [২]।",
+      "answer": "প্রদত্ত তথ্য অনুযায়ী, ১৯/১০/২০২৬ তারিখ ০৬:০০ ঘটিকা থেকে ২৫/১০/২০২৬ তারিখ সকাল ০৬:০০ ঘটিকা পর্যন্ত জন্ম ও মৃত্যু নিবন্ধন সিস্টেম (BDRIS) এবং এর Application Server রক্ষণাবেক্ষণ কার্যক্রমের জন্য BDRIS সিস্টেমে জন্ম ও মৃত্যু নিবন্ধন সংক্রান্ত সকল কার্যক্রম বন্ধ থাকবে [2]। \n\nযেহেতু আপনার প্রশ্ন করা বর্তমান সময়টি (চেক করার তারিখ ২০২৬-১০-২১) এই রক্ষণাবেক্ষণ ও বন্ধ থাকার সময়সীমার (১৯ থেকে ২৫ অক্টোবর ২০২৬) অন্তর্ভুক্ত, তাই এই সপ্তাহে অনলাইনে মৃত্যু নিবন্ধনের আবেদন করা যাবে না [2]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -211,7 +211,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.805,
-      "answer": "জন্ম নিবন্ধনের তথ্য সংশোধনের ফি নিচে দেওয়া হলো (৪ এপ্রিল ২০২৬ তারিখে হালনাগাদকৃত তথ্য অনুযায়ী) [১]:\n\n১. জন্ম তারিখ সংশোধনের জন্য আবেদন ফি: ১০০ টাকা [১]।\n২. জন্ম তারিখ ব্যতীত নাম, পিতার নাম, মাতার নাম, ঠিকানা ইত্যাদি অন্যান্য তথ্য সংশোধনের জন্য আবেদন ফি: ৫০ টাকা [১]।",
+      "answer": "প্রদত্ত তথ্য অনুযায়ী, জন্ম নিবন্ধনের তথ্য সংশোধনের ফি নিচে দেওয়া হলো:\n\n১. জন্ম তারিখ সংশোধনের জন্য আবেদন ফি: ১০০ টাকা [১]।\n২. জন্ম তারিখ ব্যতীত নাম, পিতার নাম, মাতার নাম, ঠিকানা ইত্যাদি অন্যান্য তথ্য সংশোধনের জন্য আবেদন ফি: ৫০ টাকা [১]। \n৩. বাংলা ও ইংরেজি উভয় ভাষায় তথ্য সংশোধনের পর সনদের কপি সরবরাহ: বিনা ফিসে [১]।\n\n(নোট: এই তথ্যগুলো ৪ এপ্রিল ২০২৬ তারিখে শেষ হালনাগাদ করা রেজিস্ট্রার জেনারেলের কার্যালয়, জন্ম ও মৃত্যু নিবন্ধনের অফিসিয়াল ফি-এর তালিকা থেকে নেওয়া হয়েছে) [১]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -220,8 +220,8 @@
       "question": "NID সংশোধনের ফি প্রথমবার কত টাকা?",
       "in_scope": true,
       "confident": true,
-      "top": 0.756,
-      "answer": "জাতীয় পরিচয়পত্র (NID) সংশোধনের ক্ষেত্রে প্রথমবার আবেদনের ফি ২০০ টাকা [2]।",
+      "top": 0.795,
+      "answer": "জাতীয় পরিচয়পত্র (NID) সংশোধনের ক্ষেত্রে প্রথমবার আবেদনের ফি ২০০ টাকা [2], [3]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -229,11 +229,11 @@
       "lang": "bn",
       "question": "আয়কর কন্টাক্ট সেন্টারের নম্বর কত?",
       "in_scope": true,
-      "confident": false,
-      "top": 0.538,
-      "answer": "আমি এ বিষয়ে নিশ্চিত নই। অনুগ্রহ করে সংশ্লিষ্ট অফিসিয়াল সরকারি পোর্টাল দেখুন অথবা স্থানীয় অফিসে যোগাযোগ করুন।",
-      "retrieval_hit": false,
-      "answer_correct": false
+      "confident": true,
+      "top": 0.725,
+      "answer": "আয়কর কন্টাক্ট সেন্টারের নম্বর হলো ৩৩৩ (333) [1]।",
+      "retrieval_hit": true,
+      "answer_correct": true
     },
     {
       "lang": "bn",
@@ -241,7 +241,7 @@
       "in_scope": true,
       "confident": true,
       "top": 0.717,
-      "answer": "হ্যাঁ, অনলাইনে মৃত্যু নিবন্ধনের আবেদনের জন্য সংযোজন অংশে জানাজা পড়ানো ইমামের প্রত্যয়নপত্র বা সৎকার সম্পন্নকারী পুরোহিতের প্রত্যয়নপত্র যুক্ত করার কথা উল্লেখ আছে [১]।",
+      "answer": "হ্যাঁ, মৃত্যুর নিবন্ধনের আবেদনের সময় সংযোজন অংশে জানাজা পড়ানো ইমামের প্রত্যয়নপত্র অথবা সৎকার সম্পন্নকারী পুরোহিতের প্রত্যয়নপত্র যুক্ত করার কথা উল্লেখ আছে [১]।",
       "retrieval_hit": true,
       "answer_correct": true
     },
@@ -250,7 +250,7 @@
       "question": "How much is the driving licence fee?",
       "in_scope": false,
       "confident": false,
-      "top": 0.628,
+      "top": 0.622,
       "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
       "refused": true
     },
@@ -259,7 +259,7 @@
       "question": "How do I apply for land mutation?",
       "in_scope": false,
       "confident": false,
-      "top": 0.574,
+      "top": 0.622,
       "answer": "I'm not sure about this based on the official sources I have. Please check the official government portal or visit your local office.",
       "refused": true
     },
