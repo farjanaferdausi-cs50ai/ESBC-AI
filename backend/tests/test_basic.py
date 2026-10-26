@@ -58,7 +58,7 @@ def test_chat_returns_answer(monkeypatch):
     monkeypatch.setattr(m, "index_ready", lambda: True)
     monkeypatch.setattr(
         m, "ask",
-        lambda q, plain=False: {"answer": "ok", "language": "en", "confident": True, "sources": [], "top_score": 0.9},
+        lambda q, plain=False, language="auto": {"answer": "ok", "language": "en", "confident": True, "sources": [], "top_score": 0.9},
     )
     res = TestClient(m.app).post("/api/chat", json={"message": "hello there"})
     assert res.status_code == 200 and res.json()["answer"] == "ok"
@@ -67,7 +67,7 @@ def test_chat_returns_answer(monkeypatch):
 def test_chat_failure_returns_503(monkeypatch):
     import app.main as m
 
-    def boom(q, plain=False):
+    def boom(q, plain=False, language="auto"):
         raise RuntimeError("boom")
 
     monkeypatch.setattr(m, "index_ready", lambda: True)
@@ -85,7 +85,7 @@ def test_chat_warming_up_returns_503(monkeypatch):
 def test_busy_quota_error_gets_friendly_message(monkeypatch):
     import app.main as m
 
-    def busy(q, plain=False):
+    def busy(q, plain=False, language="auto"):
         raise RuntimeError("429 RESOURCE_EXHAUSTED quota")
 
     monkeypatch.setattr(m, "index_ready", lambda: True)

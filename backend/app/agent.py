@@ -31,7 +31,7 @@ FALLBACK = {
 SYSTEM_PROMPT = """You are ESBC-AI, an assistant that explains Bangladeshi government services.
 Rules:
 1. Answer ONLY from the numbered context below. Never use outside knowledge.
-2. If the context does not contain the answer, reply with exactly NO_ANSWER and nothing else. Never guess fees, deadlines or requirements.
+2. If the context does not address what the user asked (for example it is about a different service or a different fee), reply with exactly NO_ANSWER and nothing else. If it covers the question only partly, answer the covered part and say clearly which parts the sources do not cover. Never guess fees, deadlines or requirements.
 3. Reply in {lang_name}. Match the language of the user's question exactly.
 4. Cite sources inline like [1] or [2] after the facts they support. Only use numbers that exist in the context.
 5. Be clear and practical. Use short numbered steps for procedures.
@@ -49,7 +49,9 @@ PLAIN_RULE = (
 class State(TypedDict, total=False):
     question: str
     plain: bool
+    language_pref: str
     language: str
+    gate_passed: bool
     hits: List[dict]
     confident: bool
     answer: str
@@ -57,6 +59,8 @@ class State(TypedDict, total=False):
 
 
 def detect_language(state: State) -> State:
+    if state.get("language_pref") in ("bn", "en"):
+        return {"language": state["language_pref"]}
     text = state["question"]
     bn = len(re.findall(r"[\u0980-\u09FF]", text))
     letters = len(re.findall(r"[A-Za-z\u0980-\u09FF]", text)) or 1
@@ -70,7 +74,8 @@ def retrieve(state: State) -> State:
 def gate(state: State) -> State:
     hits = state.get("hits", [])
     best = max((h["score"] for h in hits), default=0.0)
-    return {"confident": best >= SCORE_THRESHOLD}
+    passed = best >= SCORE_THRESHOLD
+    return {"confident": passed, "gate_passed": passed}
 
 
 def route(state: State) -> str:
@@ -162,15 +167,32 @@ _cache = {}
 CACHE_SIZE = 256
 
 
-def ask(question: str, plain: bool = False) -> dict:
+def _build_trace(out: dict, language_pref: str) -> dict:
+    best = {}
+    for h in out.get("hits", []):
+        key = h["title"]
+        if key not in best or h["score"] > best[key]["score"]:
+            best[key] = {"title": h["title"], "service": h["service"], "score": h["score"]}
+    return {
+        "language": out["language"],
+        "language_source": "selected" if language_pref in ("bn", "en") else "detected",
+        "retrieved": sorted(best.values(), key=lambda r: r["score"], reverse=True),
+        "threshold": SCORE_THRESHOLD,
+        "gate": "passed" if out.get("gate_passed") else "declined",
+        "answered": bool(out["confident"]),
+    }
+
+
+def ask(question: str, plain: bool = False, language: str = "auto") -> dict:
     """Answer a question. Repeated questions are served from a small in-memory cache."""
     global _graph
-    key = (" ".join(question.lower().split()), bool(plain))
+    language = language if language in ("bn", "en") else "auto"
+    key = (" ".join(question.lower().split()), bool(plain), language)
     if key in _cache:
         return dict(_cache[key])
     if _graph is None:
         _graph = build_graph()
-    out = _graph.invoke({"question": question, "plain": plain})
+    out = _graph.invoke({"question": question, "plain": plain, "language_pref": language})
     hits = out.get("hits", [])
     result = {
         "answer": out["answer"],
@@ -178,6 +200,7 @@ def ask(question: str, plain: bool = False) -> dict:
         "confident": out["confident"],
         "sources": out.get("sources", []),
         "top_score": max((h["score"] for h in hits), default=None),
+        "trace": _build_trace(out, language),
     }
     if len(_cache) >= CACHE_SIZE:
         _cache.pop(next(iter(_cache)))

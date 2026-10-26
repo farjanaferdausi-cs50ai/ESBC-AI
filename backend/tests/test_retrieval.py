@@ -180,3 +180,26 @@ def test_repeated_questions_are_cached(monkeypatch):
     second = agent.ask("  what is the FEE? ")
     assert first == second and calls["n"] == 1
     agent._cache.clear()
+
+
+def test_language_preference_overrides_detection(monkeypatch):
+    hits = [{"text": "a", "score": 0.8, "title": "T", "url": "u", "date_checked": "d", "service": "s"}]
+    monkeypatch.setattr(agent, "search", lambda q, k=5: hits)
+    monkeypatch.setattr(agent, "_call_model", lambda system, user: "answer [1]")
+    out = agent.ask("What is the fee?", language="bn")
+    assert out["language"] == "bn"
+    assert out["trace"]["language_source"] == "selected"
+    auto = agent.ask("What is the fee?")
+    assert auto["language"] == "en" and auto["trace"]["language_source"] == "detected"
+
+
+def test_trace_reports_gate_and_retrieval(monkeypatch):
+    hits = [
+        {"text": "a", "score": 0.8, "title": "T1", "url": "u1", "date_checked": "d", "service": "s"},
+        {"text": "b", "score": 0.6, "title": "T1", "url": "u1", "date_checked": "d", "service": "s"},
+    ]
+    monkeypatch.setattr(agent, "search", lambda q, k=5: hits)
+    monkeypatch.setattr(agent, "_call_model", lambda system, user: "NO_ANSWER")
+    out = agent.ask("something unrelated")
+    assert out["trace"]["gate"] == "passed" and out["trace"]["answered"] is False
+    assert [r["title"] for r in out["trace"]["retrieved"]] == ["T1"]

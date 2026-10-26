@@ -33,7 +33,7 @@ Government services in Bangladesh are essential, but the information about them 
 
 | | |
 |---|---|
-| **Languages** | Bangla and English. The answer language follows the question language |
+| **Languages** | Bangla and English. A switch lets you choose the answer language: Auto (follows the question), English or Bangla |
 | **Grounding** | Answers come only from stored official pages, each with URL and verification date |
 | **Honesty** | A confidence gate declines out-of-scope questions with "I'm not sure" |
 | **Current notices** | A real maintenance notice on the BDRIS portal (19 to 25 October 2026) is stored and surfaced when relevant |
@@ -45,11 +45,14 @@ Government services in Bangladesh are essential, but the information about them 
 ## Features
 
 - **Ask anything** about the covered services and get a short answer with numbered citations and source cards.
-- **Plain-language mode** rewrites the explanation in very simple words.
+- **Language switch** in the header sets the interface and the answer language to English, Bangla or Auto.
+- **Simple words mode** rewrites the explanation in very short, simple sentences.
+- **How I answered panel** shows the language used, which official pages were searched with their match score, whether the confidence check passed, and whether the answer was written or declined.
 - **Death certificate guide** turns two answers into a step-by-step checklist with the fee and any current notice, and can be printed.
 - **Allowance finder** checks age, sex and income against the official rules of social allowances.
 - **Transparency:** every source card shows the page and the date it was checked. Older figures are flagged in the answer, for example the 2015 NID fee notice.
 - **Server status** is shown in the interface, because free hosting sleeps when idle.
+- **Resilience:** if one Gemini model is busy or out of quota the agent tries the next model, and repeated questions are answered from an in-memory cache.
 
 ## Architecture
 
@@ -71,7 +74,7 @@ flowchart LR
 1. **Knowledge base.** Official pages are stored as Markdown files in `data/sources/` with front matter: service, title, URL, date checked and language.
 2. **Ingestion.** `python -m app.ingest` splits each file into overlapping chunks, embeds them with `gemini-embedding-001` (768 dimensions) and stores them in a persistent Chroma collection.
 3. **Retrieval.** A question is embedded and searched densely and with BM25. The two rankings are merged with reciprocal rank fusion. Chunks of the same page are grouped into one numbered source.
-4. **Gate.** If the best dense similarity is below `SCORE_THRESHOLD`, the model is not called and the assistant declines.
+4. **Gate.** If the best dense similarity is below `SCORE_THRESHOLD` (0.45 by default, tuned on the evaluation set), the model is not called and the assistant declines. Cross-language questions score lower than same-language ones, so the gate is deliberately permissive and the `NO_ANSWER` protocol in the next step does the fine-grained refusal.
 5. **Generation.** Gemini answers only from the numbered context, in the language of the question, and cites sources as [1], [2]. If the context does not contain the answer it must reply `NO_ANSWER`, which the agent turns into the honest fallback. Only the sources the answer actually cites are shown. The prompt also tells it to mention closures and deadlines, to state the year of older figures and to prefer newer sources.
 
 ## Knowledge base
@@ -85,6 +88,8 @@ flowchart LR
 | NID | Election Commission fee notice and NID portal | The fee notice dates from 2015 and is flagged as such |
 | Social allowances (DSS) | Old age, widow, disadvantaged communities, serious disease support | Rules, amounts and documents |
 | Tax | NBR and e-TIN portal pages | Contact numbers only, no tax rules yet |
+
+Each official page is stored in its original language together with a companion translation prepared by the project author. The translation is labelled as such and carries the same URL and date, so Bangla and English questions find the same facts and every citation still points to the official page. The Bangla or English official text remains the authority.
 
 Only official `.gov.bd` pages are used. News sites, blogs and forums are deliberately excluded. Where an official page could not be read, the assistant has no answer and says so.
 
@@ -105,7 +110,9 @@ The checks are keyword based, not an LLM judge, so they are a lower bound on qua
 ## Screenshots
 
 <!-- shots:start -->
-Screenshots are added after deployment.
+| Home | Answer with sources |
+|---|---|
+| ![Home](docs/screenshots/home.png) | ![Answer with sources](docs/screenshots/answer.png) |
 <!-- shots:end -->
 
 ## Tech stack

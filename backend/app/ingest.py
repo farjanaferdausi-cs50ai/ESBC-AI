@@ -52,16 +52,19 @@ def main():
     if not files:
         sys.exit(f"No .md files found in {SOURCES_DIR}")
 
-    ids, docs, metas = [], [], []
+    ids, docs, metas, embed_texts = [], [], [], []
     for path in files:
         meta, body = parse_doc(path)
+        keywords = meta.get("keywords", "")
         for i, chunk in enumerate(chunk_text(body)):
             ids.append(f"{path.stem}-{i}")
             docs.append(chunk)
+            # Bilingual search keywords help English questions find Bangla pages and the reverse.
+            embed_texts.append(f"{chunk}\nKeywords: {keywords}" if keywords else chunk)
             metas.append({**meta, "source_file": path.name, "chunk": i})
 
     print(f"{len(files)} files -> {len(docs)} chunks")
-    embeddings = embed(docs, "RETRIEVAL_DOCUMENT")
+    embeddings = embed(embed_texts, "RETRIEVAL_DOCUMENT")
 
     client = chromadb.PersistentClient(path=str(CHROMA_DIR))
     try:

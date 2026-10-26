@@ -16,5 +16,5 @@ GEN_MODELS = [
     if m.strip()
 ]
 GEN_MODEL = GEN_MODELS[0]
-TOP_K = 5
-SCORE_THRESHOLD = float(os.getenv("SCORE_THRESHOLD", "0.6"))
+TOP_K = 6
+SCORE_THRESHOLD = float(os.getenv("SCORE_THRESHOLD", "0.45"))

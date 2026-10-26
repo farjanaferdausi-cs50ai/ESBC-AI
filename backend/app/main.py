@@ -2,6 +2,7 @@
 import logging
 import threading
 from contextlib import asynccontextmanager
+from typing import Literal
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -41,6 +42,7 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=2, max_length=1000)
     plain_mode: bool = False
+    language: Literal["auto", "bn", "en"] = "auto"
 
 
 class Source(BaseModel):
@@ -58,6 +60,7 @@ class ChatResponse(BaseModel):
     confident: bool
     top_score: float | None = None
     sources: list[Source] = []
+    trace: dict | None = None
 
 
 @app.get("/health")
@@ -78,7 +81,7 @@ def chat(req: ChatRequest):
             detail="The knowledge base is warming up. Please try again in a moment.",
         )
     try:
-        return ask(req.message.strip(), plain=req.plain_mode)
+        return ask(req.message.strip(), plain=req.plain_mode, language=req.language)
     except Exception as exc:
         log.exception("chat failed")
         text = str(exc)

@@ -26,7 +26,9 @@ def _state():
     col = _client().get_collection(COLLECTION)
     data = col.get(include=["documents", "metadatas"])
     ids, docs, metas = data["ids"], data["documents"], data["metadatas"]
-    bm25 = BM25Okapi([tokenize(d) or ["_"] for d in docs])
+    bm25 = BM25Okapi(
+        [tokenize(f"{d} {(m or {}).get('keywords', '')}") or ["_"] for d, m in zip(docs, metas)]
+    )
     return col, ids, docs, metas, bm25
 
 
