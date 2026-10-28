@@ -25,18 +25,19 @@ def replace_block(text, name, content):
 
 
 def links_block(app, api, video=None):
+    """Order: Live app | Demo video | Final report | API docs | Proposal | Evaluation."""
     parts = []
     if app:
         parts.append(f"**[Live app]({app})**")
+    if video:
+        parts.append(f"**[Demo video]({video})**")
+    if (ROOT / "docs" / "Final_Report.pdf").exists():
+        parts.append("**[Final report](docs/Final_Report.pdf)**")
     if api:
         parts.append(f"**[API docs]({api.rstrip('/')}/docs)**")
     parts.append(f"**[Proposal]({PROPOSAL})**")
     if (ROOT / "docs" / "evaluation.md").exists():
         parts.append("**[Evaluation](docs/evaluation.md)**")
-    if (ROOT / "docs" / "Final_Report.pdf").exists():
-        parts.append("**[Final report](docs/Final_Report.pdf)**")
-    if video:
-        parts.append(f"**[Demo video]({video})**")
     line = " | ".join(parts)
     if not (app or api):
         line += "\n\n*Live links are added after deployment.*"
