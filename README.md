@@ -56,18 +56,11 @@ Government services in Bangladesh are essential, but the information about them 
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  U([Citizen]) --> F[React UI<br/>Vercel]
-  F -->|POST /api/chat| B[FastAPI<br/>Render or Cloud Run]
-  B --> G{{LangGraph agent}}
-  G --> L[Detect language]
-  L --> R[Hybrid retrieval<br/>Chroma + BM25 + RRF]
-  R --> T{Confidence gate}
-  T -->|score above threshold| A[Gemini answers from context<br/>with numbered citations]
-  T -->|below threshold| N[I'm not sure<br/>fallback]
-  K[(Official sources<br/>Markdown with metadata)] -->|ingest| R
-```
+<p align="center">
+  <a href="docs/architecture.svg">
+    <img src="docs/architecture.png" alt="ESBC-AI system architecture" width="100%">
+  </a>
+</p>
 
 ### How an answer is produced
 
@@ -217,3 +210,9 @@ What this version does not do yet:
 ## Author
 
 Designed and built by **Farjana Ferdausi** as the Module 27 capstone of the Ostad AI & ML Engineering Bootcamp, Batch 6.
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE). Copyright (c) 2026 Farjana Ferdausi.
+
+The files under `data/sources/` summarize official Bangladesh government web pages. Each file keeps its source URL and the date I checked it. English and Bangla translations in those files are my own and are not official texts.

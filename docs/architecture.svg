@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0f24"/><stop offset="1" stop-color="#17133a"/></linearGradient>
+<linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14b8a6"/><stop offset="1" stop-color="#0e7490"/></linearGradient>
+<linearGradient id="gPurple" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+<linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+<linearGradient id="gOrange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
+<linearGradient id="gCyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0891b2"/></linearGradient>
+<linearGradient id="gAmber" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+<linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#059669"/></linearGradient>
+<linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+<linearGradient id="gRim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="0.5" stop-color="#a855f7"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e2e8f0"/></marker>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/>
+<text x="60" y="70" font-size="42" font-weight="700" fill="#ffffff">ESBC-AI · System Architecture</text>
+<text x="60" y="104" font-size="20" fill="#94a3b8">Bilingual (Bangla / English), citation-grounded RAG assistant for Bangladeshi government services</text>
+
+<!-- Lane 1 -->
+<rect x="60" y="140" width="300" height="130" rx="18" fill="url(#gTeal)"/>
+<text x="210" y="190" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">Citizen</text>
+<text x="210" y="222" font-size="17" fill="#ecfeff" text-anchor="middle">Asks in Bangla or English</text>
+<text x="210" y="246" font-size="17" fill="#ecfeff" text-anchor="middle">on phone or desktop</text>
+
+<rect x="500" y="140" width="420" height="130" rx="18" fill="url(#gPurple)"/>
+<text x="710" y="184" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">React 18 + Vite  ·  Vercel</text>
+<text x="710" y="214" font-size="17" fill="#f3e8ff" text-anchor="middle">EN / BN i18n · Simple words toggle</text>
+<text x="710" y="238" font-size="17" fill="#f3e8ff" text-anchor="middle">"How I answered" panel · source cards</text>
+<text x="710" y="260" font-size="14" fill="#e9d5ff" text-anchor="middle">Tabs: Ask · Death certificate guide · Allowance finder</text>
+
+<rect x="1060" y="140" width="480" height="130" rx="18" fill="url(#gBlue)"/>
+<text x="1300" y="184" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">FastAPI backend  ·  Render</text>
+<text x="1300" y="214" font-size="17" fill="#dbeafe" text-anchor="middle">/health · /api/meta · /api/chat</text>
+<text x="1300" y="238" font-size="17" fill="#dbeafe" text-anchor="middle">Pydantic validation · CORS · logging</text>
+<text x="1300" y="260" font-size="14" fill="#bfdbfe" text-anchor="middle">Friendly 503 when Gemini is busy</text>
+
+<line x1="362" y1="205" x2="498" y2="205" stroke="#e2e8f0" stroke-width="3" marker-end="url(#ar)"/>
+<line x1="922" y1="205" x2="1058" y2="205" stroke="#e2e8f0" stroke-width="3" marker-end="url(#ar)"/>
+<text x="430" y="195" font-size="14" fill="#94a3b8" text-anchor="middle">question</text>
+<text x="990" y="195" font-size="14" fill="#94a3b8" text-anchor="middle">POST</text>
+<line x1="1300" y1="272" x2="1300" y2="338" stroke="#e2e8f0" stroke-width="3" marker-end="url(#ar)"/>
+<line x1="710" y1="338" x2="710" y2="272" stroke="#4ade80" stroke-width="3" marker-end="url(#ar)"/>
+<text x="722" y="310" font-size="15" fill="#4ade80">answer + cited sources</text>
+
+<!-- Agent panel -->
+<rect x="60" y="340" width="1480" height="300" rx="24" fill="#0f1733" stroke="url(#gRim)" stroke-width="3"/>
+<text x="90" y="378" font-size="22" font-weight="700" fill="#e2e8f0">LangGraph agent</text>
+<text x="322" y="378" font-size="17" fill="#94a3b8">runs inside FastAPI · one pipeline per question</text>
+
+<g font-size="15">
+<rect x="90" y="400" width="250" height="210" rx="16" fill="url(#gOrange)"/>
+<text x="215" y="436" font-size="21" font-weight="700" fill="#fff" text-anchor="middle">1 · Detect language</text>
+<text x="215" y="480" fill="#fff7ed" text-anchor="middle">Bangla or English</text>
+<text x="215" y="506" fill="#fff7ed" text-anchor="middle">or forced by the UI switch</text>
+
+<rect x="380" y="400" width="250" height="210" rx="16" fill="url(#gCyan)"/>
+<text x="505" y="436" font-size="21" font-weight="700" fill="#fff" text-anchor="middle">2 · Hybrid retrieval</text>
+<text x="505" y="480" fill="#ecfeff" text-anchor="middle">Gemini embeddings (768-d)</text>
+<text x="505" y="506" fill="#ecfeff" text-anchor="middle">+ BM25 keyword search</text>
+<text x="505" y="532" fill="#ecfeff" text-anchor="middle">Reciprocal rank fusion</text>
+<text x="505" y="558" fill="#ecfeff" text-anchor="middle">Top 5 chunks</text>
+
+<rect x="670" y="400" width="250" height="210" rx="16" fill="url(#gAmber)"/>
+<text x="795" y="436" font-size="21" font-weight="700" fill="#fff" text-anchor="middle">3 · Confidence gate</text>
+<text x="795" y="480" fill="#fffbeb" text-anchor="middle">Match score threshold 0.45</text>
+<text x="795" y="506" fill="#fffbeb" text-anchor="middle">Too low: honest "I am not</text>
+<text x="795" y="532" fill="#fffbeb" text-anchor="middle">sure", never a guess</text>
+
+<rect x="960" y="400" width="250" height="210" rx="16" fill="url(#gGreen)"/>
+<text x="1085" y="436" font-size="21" font-weight="700" fill="#fff" text-anchor="middle">4 · Grounded answer</text>
+<text x="1085" y="480" fill="#ecfdf5" text-anchor="middle">Gemini, context only</text>
+<text x="1085" y="506" fill="#ecfdf5" text-anchor="middle">Partial answers say</text>
+<text x="1085" y="532" fill="#ecfdf5" text-anchor="middle">what is missing</text>
+<text x="1085" y="558" fill="#ecfdf5" text-anchor="middle">Next model on 429 / 503</text>
+
+<rect x="1250" y="400" width="260" height="210" rx="16" fill="url(#gPink)"/>
+<text x="1380" y="436" font-size="21" font-weight="700" fill="#fff" text-anchor="middle">5 · Cited response</text>
+<text x="1380" y="480" fill="#fdf2f8" text-anchor="middle">Only cited sources returned</text>
+<text x="1380" y="506" fill="#fdf2f8" text-anchor="middle">Official URL + date checked</text>
+<text x="1380" y="532" fill="#fdf2f8" text-anchor="middle">In-memory answer cache</text>
+</g>
+<g stroke="#e2e8f0" stroke-width="3" marker-end="url(#ar)">
+<line x1="342" y1="505" x2="378" y2="505"/><line x1="632" y1="505" x2="668" y2="505"/>
+<line x1="922" y1="505" x2="958" y2="505"/><line x1="1212" y1="505" x2="1248" y2="505"/>
+</g>
+
+<!-- Bottom lane -->
+<rect x="60" y="730" width="620" height="200" rx="18" fill="url(#gTeal)"/>
+<text x="370" y="772" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">Knowledge base · official sources only</text>
+<g font-size="16" fill="#ecfeff" text-anchor="middle">
+<text x="370" y="812">data/sources/&lt;service&gt;/*.md · 29 pages · 76 chunks</text>
+<text x="370" y="840">Every page keeps its .gov.bd URL and date_checked</text>
+<text x="370" y="868">Death and birth registration · fees · passport · NID</text>
+<text x="370" y="896">Tax contacts · DSS allowances · BDRIS notice</text>
+<text x="370" y="920" font-size="14">Bangla pages carry an author's English translation</text>
+</g>
+<rect x="740" y="730" width="380" height="200" rx="18" fill="url(#gPurple)"/>
+<text x="930" y="772" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">Search index</text>
+<g font-size="16" fill="#f3e8ff" text-anchor="middle">
+<text x="930" y="816">Chroma vector store (768-d)</text>
+<text x="930" y="844">BM25 keyword index</text>
+<text x="930" y="880">Built by app/ingest.py</text>
+<text x="930" y="908">Chunked with front matter</text>
+</g>
+<rect x="1180" y="730" width="360" height="200" rx="18" fill="url(#gBlue)"/>
+<text x="1360" y="772" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">Google Gemini API</text>
+<g font-size="16" fill="#dbeafe" text-anchor="middle">
+<text x="1360" y="816">gemini-embedding-001</text>
+<text x="1360" y="844">gemini-flash-latest</text>
+<text x="1360" y="872">then gemini-flash-lite-latest</text>
+<text x="1360" y="906" font-size="14">No local PyTorch needed</text>
+</g>
+<g stroke="#e2e8f0" stroke-width="3" fill="none" marker-end="url(#ar)">
+<line x1="682" y1="830" x2="738" y2="830"/>
+<path d="M930,728 L930,684 L505,684 L505,612"/>
+<path d="M1360,728 L1360,684 L1085,684 L1085,612"/>
+</g>
+<text x="720" y="676" font-size="14" fill="#94a3b8">retrieve</text>
+<text x="1200" y="676" font-size="14" fill="#94a3b8">embed + generate</text>
+
+<text x="800" y="972" font-size="16" fill="#94a3b8" text-anchor="middle">Built by Farjana Ferdausi · Ostad AI and ML Engineering Bootcamp, Batch 6 · FastAPI · LangGraph · ChromaDB · BM25 · Gemini · React · Vite</text>
+</svg>
