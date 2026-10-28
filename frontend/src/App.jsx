@@ -441,11 +441,11 @@ function NetworkBg() {
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = w + "px"; canvas.style.height = h + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.max(40, Math.min(110, Math.round((w * h) / 16000)));
+      const n = Math.max(70, Math.min(230, Math.round((w * h) / 8500)));
       dots = Array.from({ length: n }, () => ({
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.6 + 0.7, tw: Math.random() * 6.28,
+        r: Math.random() * 1.9 + 1.1, tw: Math.random() * 6.28,
       }));
     }
     function frame() {
@@ -460,20 +460,20 @@ function NetworkBg() {
         for (let j = i + 1; j < dots.length; j++) {
           const b = dots[j];
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dist < 150) {
-            ctx.strokeStyle = `rgba(57, 255, 136, ${0.3 * (1 - dist / 150)})`;
-            ctx.lineWidth = 1;
+          if (dist < 185) {
+            ctx.strokeStyle = `rgba(57, 255, 136, ${0.55 * (1 - dist / 185)})`;
+            ctx.lineWidth = 1.2;
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
         }
         const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-        if (md < 190) {
-          ctx.strokeStyle = `rgba(140, 255, 190, ${0.75 * (1 - md / 190)})`;
+        if (md < 260) {
+          ctx.strokeStyle = `rgba(150, 255, 200, ${0.9 * (1 - md / 260)})`;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
         }
         const glow = 0.55 + 0.45 * Math.sin(a.tw);
         ctx.fillStyle = `rgba(110, 255, 170, ${0.6 + 0.4 * glow})`;
-        ctx.shadowColor = "rgba(57, 255, 136, 0.95)"; ctx.shadowBlur = 8 * glow;
+        ctx.shadowColor = "rgba(57, 255, 136, 0.95)"; ctx.shadowBlur = 14 * glow;
         ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill();
         ctx.shadowBlur = 0;
       }

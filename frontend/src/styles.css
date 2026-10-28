@@ -340,3 +340,60 @@ body { background: #000 !important; background-image: none !important; }
 .bars li:nth-child(4) .bar i { background: linear-gradient(90deg, #a78bfa, #e3d9ff); }
 .credit { color: #8f89b0; }
 .hint { color: #8f89b0; }
+
+
+/* ---- v7: black, strong neon green, sky blue, white text ---- */
+:root {
+  --line: rgba(57, 255, 136, 0.4);
+  --text: #ffffff;
+  --muted: #e6eefc;
+  --indigo: #0ea5e9;
+  --violet: #7dd3fc;
+  --gold: #bff5d6;
+  --sky: #38bdf8;
+  --sky-deep: #0284c7;
+  --neon: #39ff88;
+}
+body { color: #ffffff; }
+.hero p, .tile-q, .panel-sub, .brand-sub, .stats span, .source-meta, .trace-steps, .hint, .credit, .field, .chip-badge, .sources-title { color: #f1f6ff; }
+.credit, .hint { opacity: 0.85; }
+.topbar, .composer-wrap { border-color: rgba(57, 255, 136, 0.55); box-shadow: 0 0 34px rgba(57, 255, 136, 0.22); }
+.logo { background: linear-gradient(135deg, #38bdf8, #39ff88); box-shadow: 0 0 30px rgba(57, 255, 136, 0.6); }
+.brand-name { background: linear-gradient(90deg, #ffffff, #39ff88); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.eyebrow { color: #39ff88; border-color: rgba(57, 255, 136, 0.7); background: rgba(57, 255, 136, 0.12); }
+.hero h1 { color: #ffffff; }
+.grad { background: linear-gradient(90deg, #39ff88, #7dffb3 55%, #7dd3fc); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 14px rgba(57, 255, 136, 0.45)); }
+.stats div { border-color: rgba(57, 255, 136, 0.5); box-shadow: 0 0 22px rgba(57, 255, 136, 0.16); }
+.stats b { color: #39ff88; -webkit-text-fill-color: #39ff88; text-shadow: 0 0 12px rgba(57, 255, 136, 0.6); }
+.art { border-color: rgba(57, 255, 136, 0.6); box-shadow: 0 0 70px rgba(57, 255, 136, 0.28), 0 0 40px rgba(56, 189, 248, 0.2), 0 30px 80px rgba(0, 0, 0, 0.8); }
+.art-badges span { border-color: rgba(57, 255, 136, 0.6); }
+.tiles-title, .panel h2 { color: #39ff88; text-shadow: 0 0 14px rgba(57, 255, 136, 0.4); }
+.tile, .panel { background: linear-gradient(160deg, #04120a, #000000 70%); border-color: rgba(57, 255, 136, 0.45); box-shadow: 0 0 28px rgba(57, 255, 136, 0.14); }
+.tile-icon { color: #39ff88; background: rgba(57, 255, 136, 0.12); border-color: rgba(57, 255, 136, 0.6); }
+.tile:hover { border-color: #39ff88; box-shadow: 0 0 40px rgba(57, 255, 136, 0.45), 0 16px 40px rgba(0, 0, 0, 0.7); }
+.tile:hover::before { background: linear-gradient(135deg, #39ff88, #38bdf8); }
+.tile:hover .tile-icon { color: #ffffff; border-color: #38bdf8; }
+.tab, .seg, .status { border-color: rgba(57, 255, 136, 0.45); }
+.tab { color: #ffffff; }
+.tab:hover { border-color: #39ff88; color: #39ff88; }
+.tab.active, .seg button.on { color: #ffffff; background: linear-gradient(135deg, #0284c7, #38bdf8); border-color: rgba(125, 211, 252, 0.8); box-shadow: 0 0 24px rgba(56, 189, 248, 0.6); }
+.seg button { color: #ffffff; }
+.composer button, .primary { color: #ffffff; background: linear-gradient(135deg, #0284c7, #38bdf8); box-shadow: 0 0 26px rgba(56, 189, 248, 0.6); }
+.composer button:hover:not(:disabled), .primary:hover { box-shadow: 0 0 34px rgba(57, 255, 136, 0.55); filter: brightness(1.12); }
+.field { color: #39ff88; }
+.field select, .field input, .composer input { border-color: rgba(57, 255, 136, 0.5); color: #ffffff; }
+.avatar { background: linear-gradient(135deg, #0284c7, #38bdf8); box-shadow: 0 0 18px rgba(56, 189, 248, 0.6); }
+.bubble.user { background: linear-gradient(135deg, #0369a1, #38bdf8); box-shadow: 0 0 26px rgba(56, 189, 248, 0.45); }
+.bubble.bot { color: #ffffff; border-color: rgba(57, 255, 136, 0.45); }
+.answer strong, .trace-steps > li b { color: #39ff88; }
+.cite, .source-id { background: #39ff88; color: #00210f; }
+.source { border-color: rgba(57, 255, 136, 0.4); }
+.source-name { color: #ffffff; }
+.ghost, .chip-badge { border-color: rgba(57, 255, 136, 0.4); color: #ffffff; }
+.toggle input:checked + .track { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+.trace { border-color: rgba(57, 255, 136, 0.4); }
+.bars li:nth-child(1) .bar i { background: linear-gradient(90deg, #0369a1, #0ea5e9); }
+.bars li:nth-child(2) .bar i { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.bars li:nth-child(3) .bar i { background: linear-gradient(90deg, #22c55e, #39ff88); }
+.bars li:nth-child(4) .bar i { background: linear-gradient(90deg, #39ff88, #a7ffd0); }
+.netbg { opacity: 1; }
