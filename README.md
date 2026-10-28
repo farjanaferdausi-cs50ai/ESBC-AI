@@ -28,6 +28,7 @@ ESBC-AI is a bilingual (Bangla and English) AI assistant that explains Banglades
 
 </div>
 
+Demo Video Link : https://drive.google.com/file/d/1BzDsBLJKdHRGjaWd7JbAKMhISsQwalVj/view?usp=sharing
 ---
 
 ## Why this project exists
