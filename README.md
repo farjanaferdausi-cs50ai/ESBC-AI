@@ -23,7 +23,7 @@ ESBC-AI is a bilingual (Bangla and English) AI assistant that explains Banglades
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 <!-- links:start -->
-**[Live app](https://esbc-ai.vercel.app)** | **[Final report](docs/Final_Report.pdf)** | **[API docs](https://esbc-ai-api.onrender.com/docs)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)** | **[Evaluation](docs/evaluation.md)**
+**[Live app](https://esbc-ai.vercel.app)** | **[Demo Video Link](https://drive.google.com/file/d/1BzDsBLJKdHRGjaWd7JbAKMhISsQwalVj/view?usp=sharing)**| **[Final report](docs/Final_Report.pdf)** | **[API docs](https://esbc-ai-api.onrender.com/docs)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)** | **[Evaluation](docs/evaluation.md)** | 
 <!-- links:end -->
 
 </div>
