@@ -1,4 +1,5 @@
 {
   "app": "https://esbc-ai.vercel.app",
-  "api": "https://esbc-ai-api.onrender.com"
+  "api": "https://esbc-ai-api.onrender.com",
+  "video": null
 }

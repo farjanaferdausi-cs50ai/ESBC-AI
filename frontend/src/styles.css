@@ -253,3 +253,56 @@ body { background: radial-gradient(1200px 700px at 12% -10%, #1b2a6b 0%, transpa
   .tiles { grid-template-columns: 1fr; }
   .art img { max-height: 220px; }
 }
+
+
+/* ---- v5: bright blue theme ---- */
+:root {
+  --bg: #0f4fc4;
+  --panel: rgba(255, 255, 255, 0.14);
+  --panel-2: rgba(255, 255, 255, 0.2);
+  --line: rgba(255, 255, 255, 0.32);
+  --text: #ffffff;
+  --muted: #d6e9ff;
+  --teal: #8fe3ff;
+  --cyan: #5cd0ff;
+  --indigo: #3b8bff;
+  --violet: #9cc2ff;
+  --gold: #e3f3ff;
+}
+body { background: radial-gradient(900px 600px at 8% -5%, #5db4ff 0%, transparent 60%), radial-gradient(900px 700px at 100% 10%, #1fa6ff 0%, transparent 55%), linear-gradient(135deg, #0b3f9e 0%, #1565d8 48%, #2e9bff 100%); background-attachment: fixed; }
+.aurora i:nth-child(1) { background: #7fcbff; }
+.aurora i:nth-child(2) { background: #2a73ff; }
+.aurora i:nth-child(3) { background: #b4e1ff; }
+.aurora::after { opacity: 0.35; }
+.topbar { background: rgba(10, 56, 140, 0.55); }
+.composer-wrap { background: rgba(10, 56, 140, 0.6); }
+.logo { background: linear-gradient(135deg, #ffffff, #8fd2ff, #3b8bff); box-shadow: 0 8px 30px rgba(20, 110, 255, 0.5); }
+.logo span { background: #0d4bb8; color: #fff; }
+.brand-name { background: linear-gradient(90deg, #ffffff, #bfe5ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.eyebrow { color: #ffffff; border-color: rgba(255, 255, 255, 0.55); background: rgba(255, 255, 255, 0.16); }
+.grad { background: linear-gradient(90deg, #ffffff, #bfe8ff 50%, #7fe9ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stats b { background: linear-gradient(90deg, #ffffff, #9fe3ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.art { border-color: rgba(255, 255, 255, 0.5); box-shadow: 0 30px 80px rgba(5, 30, 90, 0.45), 0 0 70px rgba(120, 200, 255, 0.4); }
+.tile, .panel { background: linear-gradient(160deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08)); }
+.tile-icon { color: #ffffff; background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); }
+.tile:hover { border-color: #ffffff; box-shadow: 0 16px 40px rgba(5, 30, 90, 0.4), 0 0 34px rgba(160, 220, 255, 0.5); }
+.tile:hover::before { background: linear-gradient(135deg, #ffffff, #5cd0ff); }
+
+.tab.active, .seg button.on { color: #0b3f9e; background: linear-gradient(135deg, #ffffff, #d9eeff); box-shadow: 0 6px 22px rgba(255, 255, 255, 0.35); }
+.composer button, .primary { color: #fff; background: linear-gradient(135deg, #1b6dff, #12b8ff); box-shadow: 0 8px 24px rgba(10, 60, 170, 0.5); }
+.avatar { color: #fff; background: linear-gradient(135deg, #1b6dff, #5cd0ff); }
+.bubble.user { background: linear-gradient(135deg, #1b5fe0, #3b9bff); box-shadow: 0 8px 24px rgba(8, 45, 140, 0.45); }
+.bubble.bot { background: rgba(8, 46, 120, 0.42); }
+.cite, .source-id { background: #ffffff; color: #0b3f9e; }
+.source { background: rgba(255, 255, 255, 0.12); }
+.field select, .field input, .composer input { background: rgba(255, 255, 255, 0.16); }
+.field select:focus, .field input:focus, .composer input:focus { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25); }
+.toggle input:checked + .track { background: linear-gradient(90deg, #ffffff, #8fd2ff); }
+.typing i { background: #ffffff; }
+.trace summary::before { color: #ffffff; }
+.bar { background: rgba(255, 255, 255, 0.2); }
+.bars li:nth-child(1) .bar i { background: linear-gradient(90deg, #d9f1ff, #ffffff); }
+.bars li:nth-child(2) .bar i { background: linear-gradient(90deg, #8fd6ff, #c5ebff); }
+.bars li:nth-child(3) .bar i { background: linear-gradient(90deg, #4cb4ff, #8fd6ff); }
+.bars li:nth-child(4) .bar i { background: linear-gradient(90deg, #1f8fff, #4cb4ff); }
+@media (max-width: 640px) { .topbar { background: rgba(10, 56, 140, 0.7); } }

@@ -24,7 +24,7 @@ def replace_block(text, name, content):
     return pattern.sub(lambda m: f"{m.group(1)}\n{content}\n{m.group(3)}", text)
 
 
-def links_block(app, api):
+def links_block(app, api, video=None):
     parts = []
     if app:
         parts.append(f"**[Live app]({app})**")
@@ -33,8 +33,10 @@ def links_block(app, api):
     parts.append(f"**[Proposal]({PROPOSAL})**")
     if (ROOT / "docs" / "evaluation.md").exists():
         parts.append("**[Evaluation](docs/evaluation.md)**")
-    if (ROOT / "docs" / "REPORT.md").exists():
-        parts.append("**[Final report](docs/REPORT.md)**")
+    if (ROOT / "docs" / "Final_Report.pdf").exists():
+        parts.append("**[Final report](docs/Final_Report.pdf)**")
+    if video:
+        parts.append(f"**[Demo video]({video})**")
     line = " | ".join(parts)
     if not (app or api):
         line += "\n\n*Live links are added after deployment.*"
@@ -76,20 +78,22 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--app")
     parser.add_argument("--api")
+    parser.add_argument("--video")
     args = parser.parse_args()
 
     saved = json.loads(LINKS.read_text(encoding="utf-8")) if LINKS.exists() else {}
     app = args.app or saved.get("app")
     api = args.api or saved.get("api")
+    video = args.video or saved.get("video")
     LINKS.parent.mkdir(exist_ok=True)
-    LINKS.write_text(json.dumps({"app": app, "api": api}, indent=2), encoding="utf-8")
+    LINKS.write_text(json.dumps({"app": app, "api": api, "video": video}, indent=2), encoding="utf-8")
 
     text = README.read_text(encoding="utf-8")
-    text = replace_block(text, "links", links_block(app, api))
+    text = replace_block(text, "links", links_block(app, api, video))
     text = replace_block(text, "eval", eval_block())
     text = replace_block(text, "shots", shots_block())
     README.write_text(text, encoding="utf-8")
-    print("README.md updated. App:", app, "| API:", api)
+    print("README.md updated. App:", app, "| API:", api, "| Video:", video)
 
 
 if __name__ == "__main__":

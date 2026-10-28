@@ -6,7 +6,7 @@
 
 ### Easy Service for Bangladeshi Citizens
 
-A bilingual (Bangla and English), citation-grounded AI assistant that explains Bangladeshi government services. Every answer shows its official source and the date I checked it, and when the sources do not cover a question, the assistant says so instead of guessing.
+ESBC-AI is a bilingual (Bangla and English) AI assistant that explains Bangladeshi government services in plain language. It is a citation-grounded retrieval-augmented generation (RAG) system: a LangGraph agent retrieves passages from official `.gov.bd` pages with hybrid search (Gemini embeddings in ChromaDB plus BM25, merged by reciprocal rank fusion), checks its own confidence, and writes the answer with Gemini only from what it found. Every answer shows its official source and the date I checked it, and when the sources do not cover a question, the assistant says so instead of guessing.
 
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
@@ -16,9 +16,14 @@ A bilingual (Bangla and English), citation-grounded AI assistant that explains B
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-vector%20store-2dd4bf)
 ![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
 ![Status](https://img.shields.io/badge/status-capstone%20MVP-34d399)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Search](https://img.shields.io/badge/search-dense%20%2B%20BM25%20%2B%20RRF-1f7aff)
+![Vercel](https://img.shields.io/badge/frontend-Vercel-000000?logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/backend-Render-46E3B7?logo=render&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 <!-- links:start -->
-**[Live app](https://esbc-ai.vercel.app)** | **[API docs](https://esbc-ai-api.onrender.com/docs)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)** | **[Evaluation](docs/evaluation.md)**
+**[Live app](https://esbc-ai.vercel.app)** | **[API docs](https://esbc-ai-api.onrender.com/docs)** | **[Proposal](https://farjanaferdausi-cs50ai.github.io/ESBC-AI-Proposal/)** | **[Evaluation](docs/evaluation.md)** | **[Final report](docs/Final_Report.pdf)**
 <!-- links:end -->
 
 </div>

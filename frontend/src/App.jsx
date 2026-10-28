@@ -461,19 +461,19 @@ function NetworkBg() {
           const b = dots[j];
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
           if (dist < 150) {
-            ctx.strokeStyle = `rgba(110, 200, 255, ${0.22 * (1 - dist / 150)})`;
+            ctx.strokeStyle = `rgba(210, 236, 255, ${0.34 * (1 - dist / 150)})`;
             ctx.lineWidth = 1;
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
         }
         const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
         if (md < 190) {
-          ctx.strokeStyle = `rgba(94, 234, 212, ${0.6 * (1 - md / 190)})`;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.7 * (1 - md / 190)})`;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
         }
         const glow = 0.55 + 0.45 * Math.sin(a.tw);
-        ctx.fillStyle = `rgba(190, 235, 255, ${0.5 + 0.5 * glow})`;
-        ctx.shadowColor = "rgba(94, 234, 212, 0.9)"; ctx.shadowBlur = 8 * glow;
+        ctx.fillStyle = `rgba(235, 247, 255, ${0.55 + 0.45 * glow})`;
+        ctx.shadowColor = "rgba(140, 210, 255, 0.95)"; ctx.shadowBlur = 8 * glow;
         ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill();
         ctx.shadowBlur = 0;
       }
