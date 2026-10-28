@@ -397,3 +397,28 @@ body { color: #ffffff; }
 .bars li:nth-child(3) .bar i { background: linear-gradient(90deg, #22c55e, #39ff88); }
 .bars li:nth-child(4) .bar i { background: linear-gradient(90deg, #39ff88, #a7ffd0); }
 .netbg { opacity: 1; }
+
+
+/* ---- v8: sky blue text, calmer network, large blended banner ---- */
+:root { --text: #7dd3fc; --muted: #7dd3fc; --sky-text: #7dd3fc; --sky-bright: #38bdf8; --on-sky: #02131f; }
+body, .hero h1, .tab, .seg button, .tile-name, .source-name, .bubble.bot, .chip-badge, .ghost, .stats span, .brand-sub,
+.hero p, .tile-q, .panel-sub, .source-meta, .trace-steps, .hint, .credit, .sources-title, .toggle, .toggle-label, .seg-caption, .answer, .answer p, .answer li, .waiting { color: #7dd3fc; }
+.tab:hover, .ghost:hover { color: #39ff88; }
+.art-badges span { color: #7dd3fc; }
+.field select, .field input, .composer input { color: #7dd3fc; }
+.composer input::placeholder { color: rgba(125, 211, 252, 0.6); }
+.field { color: #39ff88; }
+.tab.active, .seg button.on, .composer button, .primary { color: #02131f; background: linear-gradient(135deg, #38bdf8, #7dd3fc); }
+.bubble.user { color: #02131f; background: linear-gradient(135deg, #38bdf8, #7dd3fc); }
+.avatar { color: #02131f; background: linear-gradient(135deg, #38bdf8, #7dd3fc); }
+.answer strong { color: #39ff88; }
+.brand-name { background: linear-gradient(90deg, #7dd3fc, #39ff88); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.hero { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr); gap: 20px; }
+.art { max-width: none; border: 0 !important; border-radius: 0; box-shadow: none !important; overflow: visible; background: transparent; }
+.art::after { display: none !important; }
+.art img { max-height: 520px; width: 100%; object-fit: cover; border-radius: 0;
+  -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 45%, rgba(0,0,0,0.6) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 45%, rgba(0,0,0,0.6) 68%, transparent 100%); }
+.art-badges { bottom: 6px; }
+@media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } .art img { max-height: 340px; } }
