@@ -459,3 +459,6 @@ body, .hero h1, .tab, .seg button, .tile-name, .source-name, .bubble.bot, .chip-
   mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 62%, rgba(0,0,0,0.55) 82%, transparent 100%); }
 @media (max-height: 760px) { .art img { height: 32vh; min-height: 0; } }
 @media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } .art { justify-self: center; } .art img { width: 100%; height: auto; max-height: 300px; } }
+
+.tab.back { color: #39ff88; border-color: #39ff88; background: rgba(57, 255, 136, 0.1); font-weight: 600; }
+.tab.back:hover { background: rgba(57, 255, 136, 0.22); box-shadow: 0 0 18px rgba(57, 255, 136, 0.4); }

@@ -517,10 +517,27 @@ export default function App() {
     return () => window.removeEventListener("afterprint", clear);
   }, []);
 
+  function goHome() {
+    setMessages([]);
+    setTab("ask");
+    setInput("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    const onPop = () => { setMessages([]); setTab("ask"); setInput(""); };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  const isBn = /[\u0980-\u09FF]/.test(t.tabs.ask || "");
+  const showBack = messages.length > 0 || tab !== "ask";
+
   async function send(text) {
     const question = text.trim();
     setTab("ask");
     if (question.length < 2 || loading) return;
+    if (messages.length === 0) window.history.pushState({ esbc: 1 }, "");
     setMessages((prev) => [...prev, { role: "user", text: question }]);
     setInput("");
     setLoading(true);
@@ -563,7 +580,7 @@ export default function App() {
       <NetworkBg />
 
       <header className="topbar">
-        <div className="brand">
+        <div className="brand" onClick={goHome} role="button" tabIndex={0} style={{ cursor: "pointer" }} title="Home">
           <div className="logo"><span>E</span></div>
           <div>
             <div className="brand-name">ESBC-AI</div>
@@ -589,6 +606,9 @@ export default function App() {
       </header>
 
       <nav className="tabs" aria-label="Modes">
+        {showBack && (
+          <button className="tab back" onClick={goHome}>{isBn ? "\u2190 \u09B9\u09CB\u09AE" : "\u2190 Home"}</button>
+        )}
         {Object.entries(t.tabs).map(([id, label]) => (
           <button key={id} className={tab === id ? "tab active" : "tab"} onClick={() => setTab(id)}>{label}</button>
         ))}
