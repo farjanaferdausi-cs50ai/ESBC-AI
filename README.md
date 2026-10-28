@@ -103,9 +103,9 @@ The checks are keyword based, not an LLM judge, so they are a lower bound on qua
 ## Screenshots
 
 <!-- shots:start -->
-| Home | Answer with sources |
-|---|---|
-| ![Home](docs/screenshots/home.png) | ![Answer with sources](docs/screenshots/answer.png) |
+| Home | Death certificate guide | Answer with sources |
+|---|---|---|
+| ![Home](docs/screenshots/home.png) | ![Death certificate guide](docs/screenshots/guide.png) | ![Answer with sources](docs/screenshots/answer.png) |
 <!-- shots:end -->
 
 ## Tech stack

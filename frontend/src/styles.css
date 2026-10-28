@@ -1,14 +1,14 @@
 :root {
-  --bg: #04070f;
-  --panel: rgba(255, 255, 255, 0.045);
-  --panel-2: rgba(255, 255, 255, 0.08);
-  --line: rgba(148, 163, 184, 0.2);
-  --text: #e8edf8;
-  --muted: #94a3c0;
-  --teal: #2dd4bf;
-  --cyan: #22d3ee;
-  --indigo: #7c83ff;
-  --violet: #a78bfa;
+  --bg: #070d24;
+  --panel: rgba(255, 255, 255, 0.07);
+  --panel-2: rgba(255, 255, 255, 0.11);
+  --line: rgba(160, 190, 235, 0.28);
+  --text: #f4f7ff;
+  --muted: #b4c0de;
+  --teal: #3ff0d6;
+  --cyan: #3fdcff;
+  --indigo: #8e98ff;
+  --violet: #c3a6ff;
   --green: #34d399;
   --amber: #fbbf24;
   --red: #f87171;
@@ -24,7 +24,7 @@ body {
 }
 h1, h2, .brand-name { font-family: "Space Grotesk", "Inter", "Noto Sans Bengali", system-ui, sans-serif; }
 
-.app { position: relative; max-width: 1040px; min-height: 100dvh; margin: 0 auto; display: flex; flex-direction: column; isolation: isolate; }
+.app { position: relative; max-width: 1480px; min-height: 100dvh; margin: 0 auto; display: flex; flex-direction: column; isolation: isolate; }
 .app > * { position: relative; z-index: 1; }
 
 /* ambient background */
@@ -43,7 +43,7 @@ h1, h2, .brand-name { font-family: "Space Grotesk", "Inter", "Noto Sans Bengali"
 @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(60px, 40px) scale(1.15); } }
 
 /* top bar */
-.topbar { position: sticky; top: 0; z-index: 6 !important; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; padding: 12px 20px; border-bottom: 1px solid var(--line); background: rgba(4, 7, 15, 0.72); backdrop-filter: blur(16px); }
+.topbar { position: sticky; top: 0; z-index: 6 !important; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; padding: 12px 20px; border-bottom: 1px solid var(--line); background: rgba(8, 14, 38, 0.72); backdrop-filter: blur(16px); }
 .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .logo { width: 40px; height: 40px; border-radius: 12px; padding: 2px; background: linear-gradient(135deg, var(--teal), var(--indigo), var(--violet)); box-shadow: 0 8px 26px rgba(45, 212, 191, 0.3); }
 .logo span { width: 100%; height: 100%; border-radius: 10px; display: grid; place-items: center; font-weight: 700; background: #07101d; color: var(--teal); font-family: "Space Grotesk", sans-serif; }
@@ -203,4 +203,53 @@ h1, h2, .brand-name { font-family: "Space Grotesk", "Inter", "Noto Sans Bengali"
   .source-id, .cite { background: #eee; color: #000; }
   .source-meta { color: #444; }
   .print-note { display: block; margin-top: 12px; font-size: 11px; color: #444; }
+}
+
+
+/* ---- v4: wide layout, bright luxury palette, network background ---- */
+:root { --gold: #f6cf7a; }
+body { background: radial-gradient(1200px 700px at 12% -10%, #1b2a6b 0%, transparent 60%), radial-gradient(1000px 700px at 100% 0%, #0b4b5e 0%, transparent 55%), radial-gradient(900px 600px at 50% 120%, #3a1d70 0%, transparent 60%), #070d24; background-attachment: fixed; }
+.netbg { position: fixed !important; inset: 0; z-index: 0 !important; pointer-events: none; }
+.aurora { opacity: 0.8; }
+.logo { box-shadow: 0 8px 30px rgba(63, 240, 214, 0.45), 0 0 0 1px rgba(246, 207, 122, 0.4); }
+.brand-name { background: linear-gradient(90deg, #fff, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.topbar, .tabs, .content, .composer-wrap { padding-left: 32px; padding-right: 32px; }
+.content { padding-top: 14px; gap: 16px; }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 36px; align-items: center; text-align: left; padding: 10px 0 0; }
+.hero p { margin-left: 0; margin-right: 0; max-width: 560px; margin-bottom: 18px; }
+.hero h1 { font-size: clamp(32px, 4.2vw, 58px); }
+.eyebrow { color: var(--gold); border-color: rgba(246, 207, 122, 0.5); background: rgba(246, 207, 122, 0.1); margin-bottom: 14px; }
+.stats { justify-content: flex-start; margin-bottom: 0; }
+.stats b { background: linear-gradient(90deg, var(--teal), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.art { max-width: none; width: 100%; border-color: rgba(246, 207, 122, 0.35); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 70px rgba(63, 240, 214, 0.25); }
+.art img { max-height: 360px; object-fit: cover; }
+.grad { background: linear-gradient(90deg, #3ff0d6, #8e98ff 55%, #f6cf7a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.tiles-title { margin: 2px 0 10px; font-size: 19px; }
+.tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tile { padding: 14px 16px; gap: 6px; background: linear-gradient(160deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)); }
+.tile-icon { width: 36px; height: 36px; color: var(--gold); background: rgba(246, 207, 122, 0.12); border-color: rgba(246, 207, 122, 0.4); }
+.tile-q { font-size: 12.5px; line-height: 1.45; }
+.tile:hover { border-color: var(--gold); box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 34px rgba(246, 207, 122, 0.2); }
+.tile:hover::before { background: linear-gradient(135deg, var(--teal), var(--gold)); }
+
+.panel { max-width: 980px; width: 100%; margin: 0 auto; background: linear-gradient(160deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)); }
+.row { max-width: 1100px; width: 100%; margin-left: auto; margin-right: auto; }
+.composer-wrap { background: rgba(8, 14, 38, 0.85); }
+.composer { max-width: 1100px; margin: 0 auto; }
+.hint { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.composer button, .primary, .tab.active, .seg button.on { background: linear-gradient(135deg, #3ff0d6, #9bf5e6); box-shadow: 0 6px 22px rgba(63, 240, 214, 0.4); }
+.composer button:hover:not(:disabled), .primary:hover { filter: brightness(1.08); }
+
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .stats { justify-content: center; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .topbar, .tabs, .content, .composer-wrap { padding-left: 14px; padding-right: 14px; }
+  .tiles { grid-template-columns: 1fr; }
+  .art img { max-height: 220px; }
 }

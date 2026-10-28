@@ -425,6 +425,76 @@ function BenefitFinder({ t, onSubmit }) {
   );
 }
 
+
+function NetworkBg() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return undefined;
+    const ctx = canvas.getContext("2d");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let w = 0, h = 0, raf = 0, dots = [];
+    const mouse = { x: -9999, y: -9999 };
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = w + "px"; canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.max(40, Math.min(110, Math.round((w * h) / 16000)));
+      dots = Array.from({ length: n }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.6 + 0.7, tw: Math.random() * 6.28,
+      }));
+    }
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const d of dots) {
+        if (!reduce) { d.x += d.vx; d.y += d.vy; d.tw += 0.03; }
+        if (d.x < 0 || d.x > w) d.vx *= -1;
+        if (d.y < 0 || d.y > h) d.vy *= -1;
+      }
+      for (let i = 0; i < dots.length; i++) {
+        const a = dots[i];
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+          const dist = Math.hypot(a.x - b.x, a.y - b.y);
+          if (dist < 150) {
+            ctx.strokeStyle = `rgba(110, 200, 255, ${0.22 * (1 - dist / 150)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+        const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+        if (md < 190) {
+          ctx.strokeStyle = `rgba(94, 234, 212, ${0.6 * (1 - md / 190)})`;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        }
+        const glow = 0.55 + 0.45 * Math.sin(a.tw);
+        ctx.fillStyle = `rgba(190, 235, 255, ${0.5 + 0.5 * glow})`;
+        ctx.shadowColor = "rgba(94, 234, 212, 0.9)"; ctx.shadowBlur = 8 * glow;
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    const move = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
+    const leave = () => { mouse.x = -9999; mouse.y = -9999; };
+    resize(); frame();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseleave", leave);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseleave", leave);
+    };
+  }, []);
+  return <canvas ref={ref} className="netbg" aria-hidden="true" />;
+}
+
 export default function App() {
   const { status, meta } = useApiStatus();
   const [lang, setLang] = useState("auto");
@@ -449,8 +519,8 @@ export default function App() {
 
   async function send(text) {
     const question = text.trim();
-    if (question.length < 2 || loading) return;
     setTab("ask");
+    if (question.length < 2 || loading) return;
     setMessages((prev) => [...prev, { role: "user", text: question }]);
     setInput("");
     setLoading(true);
@@ -490,6 +560,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="aurora" aria-hidden="true"><i /><i /><i /></div>
+      <NetworkBg />
 
       <header className="topbar">
         <div className="brand">
@@ -530,6 +601,7 @@ export default function App() {
         {tab === "ask" && messages.length === 0 && (
           <>
             <section className="hero">
+              <div className="hero-text">
               <span className="eyebrow">{t.eyebrow}</span>
               <h1>{t.titleA} <span className="grad">{t.titleB}</span></h1>
               <p>{t.lead}</p>
@@ -540,6 +612,7 @@ export default function App() {
                   <div><b>{meta.last_checked}</b><span>{t.verified}</span></div>
                 </div>
               )}
+              </div>
               <div className="art">
                 <img src="/banner.jpg" alt="ESBC AI: the National Martyrs' Memorial and Parliament House across the water" />
                 <div className="art-badges">{t.badges.map((b) => <span key={b}>{b}</span>)}</div>
@@ -587,7 +660,7 @@ export default function App() {
         <div ref={endRef} />
       </main>
 
-      {tab === "ask" && (
+      {(
         <footer className="composer-wrap">
           <form className="composer" onSubmit={(e) => { e.preventDefault(); send(input); }}>
             <input
