@@ -450,3 +450,12 @@ body, .hero h1, .tab, .seg button, .tile-name, .source-name, .bubble.bot, .chip-
 .hint { margin-top: 3px; font-size: 11px; }
 .credit { padding: 6px 20px 8px; font-size: 10px; line-height: 1.5; }
 @media (max-height: 760px) { .art img { max-height: 28vh; min-height: 150px; } .hero p { display: none; } }
+
+/* ---- v10: show the whole banner (memorial tip and flag are no longer cropped) ---- */
+.hero { grid-template-columns: minmax(0, 1fr) auto; }
+.art { justify-self: end; width: auto; max-width: 100%; }
+.art img { width: auto; max-width: 100%; height: min(41vh, 470px); min-height: 0; max-height: none; object-fit: contain; object-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 62%, rgba(0,0,0,0.55) 82%, transparent 100%);
+  mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 62%, rgba(0,0,0,0.55) 82%, transparent 100%); }
+@media (max-height: 760px) { .art img { height: 32vh; min-height: 0; } }
+@media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } .art { justify-self: center; } .art img { width: 100%; height: auto; max-height: 300px; } }
