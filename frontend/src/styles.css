@@ -422,3 +422,31 @@ body, .hero h1, .tab, .seg button, .tile-name, .source-name, .bubble.bot, .chip-
   mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 45%, rgba(0,0,0,0.6) 68%, transparent 100%); }
 .art-badges { bottom: 6px; }
 @media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } .art img { max-height: 340px; } }
+
+
+/* ---- v9: compact layout so the home page fits at 100% zoom ---- */
+.topbar { padding-top: 8px; padding-bottom: 8px; }
+.logo { width: 34px; height: 34px; border-radius: 10px; }
+.brand-name { font-size: 16px; }
+.tabs { padding-top: 8px; }
+.tab { padding: 7px 14px; font-size: 12.5px; }
+.content { padding-top: 8px; padding-bottom: 6px; gap: 10px; }
+.hero { padding: 0; gap: 16px; }
+.eyebrow { padding: 4px 12px; margin-bottom: 8px; font-size: 11px; }
+.hero h1 { font-size: clamp(26px, 3.1vw, 42px); margin: 0 0 8px; line-height: 1.08; }
+.hero p { font-size: 14px; line-height: 1.55; margin-bottom: 12px; }
+.stats div { padding: 7px 12px; min-width: 96px; }
+.stats b { font-size: 16px; }
+.art img { max-height: 33vh; min-height: 190px; }
+.tiles-title { font-size: 16px; margin: 0 0 6px; }
+.tiles { gap: 9px; }
+.tile { padding: 9px 13px; gap: 3px; }
+.tile-icon { width: 28px; height: 28px; }
+.tile-icon svg { width: 17px; height: 17px; }
+.tile-name { font-size: 14px; }
+.tile-q { font-size: 11.5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.composer-wrap { padding-top: 8px; padding-bottom: 2px; }
+.composer input { padding: 11px 14px; }
+.hint { margin-top: 3px; font-size: 11px; }
+.credit { padding: 6px 20px 8px; font-size: 10px; line-height: 1.5; }
+@media (max-height: 760px) { .art img { max-height: 28vh; min-height: 150px; } .hero p { display: none; } }
