@@ -216,6 +216,8 @@ What this version does not do yet:
 
 Designed and built by **Farjana Ferdausi** as the Module 27 capstone of the Ostad AI & ML Engineering Bootcamp, Batch 6.
 
+Medium Link for ESBC-AI : https://medium.com/@farjana.rafi1983/building-esbc-ai-a-bilingual-citation-grounded-rag-assistant-for-bangladeshi-government-services-9d350d689426
+
 ## License
 
 The code in this repository is released under the [MIT License](LICENSE). Copyright (c) 2026 Farjana Ferdausi.
